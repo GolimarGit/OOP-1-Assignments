@@ -1,4 +1,4 @@
-package la_gom;
+package comp248.concordia;
 
 /* -------------------------------------------------------
    Assignment 1
@@ -6,31 +6,48 @@ package la_gom;
    For COMP 248 Section T – Fall 2022
    -------------------------------------------------------- */
 
+//Import the Scanner class
+import org.w3c.dom.ls.LSOutput;
+
 import java.util.Scanner;
 
+//Beginning of the class
 public class A1_Q2 {
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Welcome to the Simple Meteorological Program:"
+    /**
+     * The main method first prompts the user to enter two temperature values (the first in Fahrenheit and the second in Celsius).
+     * The input values will then be passed to the argument of the convert method.
+     * Finally, the main method will return the converted temperature values of the user-inputted values as well as x and y
+     * values defined in the Assignment Instructions.
+     * @param args
+     */
+    public static void main(String[] args) { //beginning of the main method
+        Scanner sc = new Scanner(System.in); //initializing Scanner object
+        System.out.print("Welcome to the Simple Meteorological Program:" //message prompting the user to enter two temperature values
                 + "\n+++++++++++++++++++++++++++++++++++++++++++++"
-                + "\nPlease enter the values for the 'Farenheit' and 'Celsius' scale, simultaneously: ");
-        double fTemp = sc.nextDouble();
+                + "\nPlease enter the values for the 'Fahrenheit' and 'Celsius' scale, simultaneously: ");
+        double fTemp = sc.nextDouble(); //declaring values of the Fahrenheit and Celsius temperature input
         double cTemp = sc.nextDouble();
-        convert(fTemp, cTemp);
-    }
+        convert(fTemp, cTemp); //assigning input values to the argument of the convert method
+        sc.close(); //close the Scanner object to prevent memory leak
+    } //end of the main method
 
+    /**
+     *
+     * @param fTemp The Fahrenheit temperature input from the terminal.
+     * @param cTemp The Celsius temperature input from the terminal.
+     */
     public static void convert(double fTemp, double cTemp) {
-        double conFTemp = 10d / 18 * (fTemp - 32);
-        double conCTemp = 18d / 10 * cTemp + 32;
-        System.out.println("\nThe corresponding temperature in Celsius unit is: " + conFTemp
-                + "\nThe corresponding temperature in Farenheit unit is: " + conCTemp);
+        double conFTemp = 10d / 18 * (fTemp - 32); //initializing the equation to convert the Fahrenheit temperature
+        double conCTemp = 18d / 10 * cTemp + 32; //initializing the equation to convert the Celsius temperature
+        System.out.println("\nThe corresponding temperature in Celsius unit is: " + conFTemp); //message introducing the converted temperatures
+        System.out.printf("The corresponding temperature in Fahrenheit unit is: %.1f", conCTemp);
 
-        double x = (conCTemp % conFTemp);
-        double y = Math.pow(conCTemp, conFTemp);
-        System.out.println("The corresponding value for x is: " + x
-                + "\nThe corresponding value for y is: " + y);
+        double x = Math.round(conCTemp % conFTemp); //initializing the equation for the x value
+        double y = Math.pow(conCTemp, conFTemp); //initializing the equation fo the y value
+        System.out.println("\nThe corresponding value for x is: " + x); //SOMETHING WRONG HERE
+        System.out.printf("The corresponding value for y is: %20.19f", y); //don't use printf
 
-        System.out.println("\nThank you for using my bespoke Meteorological program!");
+        System.out.println("\nThank you for using my bespoke Meteorological program!"); //closing message announcing the end of the program
     }
 }
