@@ -1,0 +1,41 @@
+package la_gom;
+
+/* -------------------------------------------------------
+   Assignment 1
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+public class A1_Q1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Welcome to the Simple 3D-Space Program:"
+                + "\n+++++++++++++++++++++++++++++++++++++++"
+                + "\nPlease enter the values for 'p' and 'q', simultaneously: ");
+        byte p = sc.nextByte();
+        byte q = sc.nextByte();
+        findCoords(p, q);
+        sc.close();
+    }
+
+    public static void findCoords(byte p, byte q) {
+        final float PI = 22f / 7;
+        final float E = 2.718281828f;
+        float x = (float) p * PI / E + 50;
+        float y = (float) p * PI / E + 50 * 12;
+        float z = (float) q + y;
+        System.out.println("\nThe Cartesian coordinates of the first object is:"
+                + "\n(" + x + ", " + y + ", " + z + ")");
+
+        float newX = x;
+        float newY = 12f * x;
+        float newZ = (float) q + newY * 6f;
+        System.out.println("The Cartesian coordinates of the nearest object is:"
+                + "\n(" + newX + ", " + newY + ", " + newZ + ")");
+
+        System.out.println("\nThank you for your contribution to this Space Project.");
+    }
+}
