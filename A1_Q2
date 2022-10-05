@@ -1,0 +1,36 @@
+package la_gom;
+
+/* -------------------------------------------------------
+   Assignment 1
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+public class A1_Q2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Welcome to the Simple Meteorological Program:"
+                + "\n+++++++++++++++++++++++++++++++++++++++++++++"
+                + "\nPlease enter the values for the 'Farenheit' and 'Celsius' scale, simultaneously: ");
+        double fTemp = sc.nextDouble();
+        double cTemp = sc.nextDouble();
+        convert(fTemp, cTemp);
+    }
+
+    public static void convert(double fTemp, double cTemp) {
+        double conFTemp = 10d / 18 * (fTemp - 32);
+        double conCTemp = 18d / 10 * cTemp + 32;
+        System.out.println("\nThe corresponding temperature in Celsius unit is: " + conFTemp
+                + "\nThe corresponding temperature in Farenheit unit is: " + conCTemp);
+
+        double x = (conCTemp % conFTemp);
+        double y = Math.pow(conCTemp, conFTemp);
+        System.out.println("The corresponding value for x is: " + x
+                + "\nThe corresponding value for y is: " + y);
+
+        System.out.println("\nThank you for using my bespoke Meteorological program!");
+    }
+}
