@@ -7,8 +7,6 @@ package comp248.concordia;
    -------------------------------------------------------- */
 
 //Import the Scanner class
-import org.w3c.dom.ls.LSOutput;
-
 import java.util.Scanner;
 
 //Beginning of the class
@@ -21,33 +19,38 @@ public class A1_Q2 {
      * values defined in the Assignment Instructions.
      * @param args
      */
-    public static void main(String[] args) { //beginning of the main method
-        Scanner sc = new Scanner(System.in); //initializing Scanner object
-        System.out.print("Welcome to the Simple Meteorological Program:" //message prompting the user to enter two temperature values
+    public static void main(String[] args) { //Beginning of the main method
+        Scanner sc = new Scanner(System.in); //Initializing Scanner object
+        System.out.print("Welcome to the Simple Meteorological Program:" //Message prompting the user to enter two temperature values
                 + "\n+++++++++++++++++++++++++++++++++++++++++++++"
                 + "\nPlease enter the values for the 'Fahrenheit' and 'Celsius' scale, simultaneously: ");
-        double fTemp = sc.nextDouble(); //declaring values of the Fahrenheit and Celsius temperature input
+        double fTemp = sc.nextDouble(); //Declaring values for the Fahrenheit and Celsius temperature inputs
         double cTemp = sc.nextDouble();
-        convert(fTemp, cTemp); //assigning input values to the argument of the convert method
-        sc.close(); //close the Scanner object to prevent memory leak
-    } //end of the main method
+        convert(fTemp, cTemp); //Assigning input values to the argument of the convert method
+        sc.close(); //Close the Scanner object to prevent memory leak
+    } //End of the main method
 
     /**
-     *
+     * The convert method takes in two temperature values from the user: the first in Fahrenheit and the second in Celsius.
+     * The temperature values are then converted into Celsius and Fahrenheit values respectively according to the formulae
+     * defined in the Assignment Instructions.
+     * Additionally, x and y values corresponding respectively to the remainder of the division of the new Celsius (divisor)
+     * and the new Fahrenheit (dividend), and the exponentiation of the new Celsius (exponent) and the new Fahrenheit (base).
+     * Finally, the method returns the converted temperatures as well as the x and y values.
      * @param fTemp The Fahrenheit temperature input from the terminal.
      * @param cTemp The Celsius temperature input from the terminal.
      */
     public static void convert(double fTemp, double cTemp) {
-        double conFTemp = 10d / 18 * (fTemp - 32); //initializing the equation to convert the Fahrenheit temperature
-        double conCTemp = 18d / 10 * cTemp + 32; //initializing the equation to convert the Celsius temperature
-        System.out.println("\nThe corresponding temperature in Celsius unit is: " + conFTemp); //message introducing the converted temperatures
-        System.out.printf("The corresponding temperature in Fahrenheit unit is: %.1f", conCTemp);
+        double newCTemp = 10d / 18 * (fTemp - 32); //Initializing the equation to convert the Fahrenheit temperature
+        double newFTemp = 18d / 10 * cTemp + 32; //Initializing the equation to convert the Celsius temperature
+        System.out.println("\nThe corresponding temperature in Celsius unit is: " + newCTemp); //Message introducing the converted temperatures
+        System.out.printf("The corresponding temperature in Fahrenheit unit is: %.1f", newFTemp);
 
-        double x = Math.round(conCTemp % conFTemp); //initializing the equation for the x value
-        double y = Math.pow(conCTemp, conFTemp); //initializing the equation fo the y value
-        System.out.println("\nThe corresponding value for x is: " + x); //SOMETHING WRONG HERE
-        System.out.printf("The corresponding value for y is: %20.19f", y); //don't use printf
+        double x = Math.round(newFTemp) % Math.round(newCTemp); //Initializing the equation for the x value
+        double y = Math.pow(newFTemp, newCTemp); //Initializing the equation for the y value
+        System.out.println("\nThe corresponding value for x is: " + x); //Messages introducing the x and y values
+        System.out.println("The corresponding value for y is: " + y);
 
-        System.out.println("\nThank you for using my bespoke Meteorological program!"); //closing message announcing the end of the program
-    }
-}
+        System.out.println("\nThank you for using my bespoke Meteorological program!"); //Closing message announcing the end of the program
+    } //End of the convert method
+} //End of the class
