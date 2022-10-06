@@ -14,44 +14,46 @@ public class A1_Q1 {
 
     /**
      * The main method first prompts the user to enter p and q byte values in the terminal.
+     * The choice of byte values correlates to Task 6 of Question 1, where the program will run into an exception
+     * if a value beyond 127 is entered by the user.
      * Said p and q values will then be passed to the findCoords method in its argument.
      * Finally, the main method will return the coordinate values defined in the Assignment Instructions.
      * @param args
      */
     public static void main(String[] args) { //Beginning of the main method
-        Scanner sc = new Scanner(System.in); //initialization of the Scanner object
-        System.out.print("Welcome to the Simple 3D-Space Program:" //message prompting the user to two enter byte values
+        Scanner sc = new Scanner(System.in); //Initialization of the Scanner object
+        System.out.print("Welcome to the Simple 3D-Space Program:" //Message prompting the user to enter two byte values
                 + "\n+++++++++++++++++++++++++++++++++++++++"
                 + "\nPlease enter the values for 'p' and 'q', simultaneously: ");
-        byte p = sc.nextByte(); //declaring byte values p and q via user input
+        byte p = sc.nextByte(); //Declaring byte values p and q via user input
         byte q = sc.nextByte();
-        findCoords(p, q); //assigning p and q variables to the argument of the findCoords method
-        sc.close(); //close the Scanner object to prevent memory leak
-    } //end of the main method
+        findCoords(p, q); //Assigning p and q variables to the argument of the findCoords method
+        sc.close(); //Close the Scanner object to prevent memory leak
+    } //End of the main method
 
     /**
      * The findCoords method takes in the two byte values inputted by the user.
      * The method then returns the corresponding Cartesian coordinates of an astronomical body in the form (x, y, z)
-     * as well as the nearest astronomical body all in double values.
+     * as well as the nearest astronomical body all in double values for the most accurate detection of celestial bodies.
      * Both triplets of numbers are calculated via the equations defined in the Assignment Instructions.
      * @param p The first byte value entered by the user.
      * @param q The second byte value entered by the user.
      */
-    public static void findCoords(byte p, byte q) {
-        final double PI = 22d / 7; //initialize the value of pi defined in the Assignment Instructions
-        final double E = 2.718281828d; //initialize the value of e defined in the Assignment Instructions
-        double x = (double) p * PI / E + 50; //initializing the equation for the x-coordinate of the stationary object
-        double y = (double) p * PI / E + 50 * 12; //initializing the equation for the y-coordinate of the stationary object
-        double z = (double) q + y; //initializing the equation for the z-coordinate of the stationary object
-        System.out.println("\nThe Cartesian coordinates of the first object is:" //message introducing the first triplet
+    public static void findCoords(byte p, byte q) { //Beginning of the findCoords method
+        final double PI = 22d / 7; //Initialize the value of pi defined in the Assignment Instructions
+        final double E = 2.718281828d; //Initialize the value of e defined in the Assignment Instructions
+        double x = (double) p * PI / E + 50; //Initializing the equation for the x-coordinate of the stationary object
+        double y = (double) p * PI / E + 50 * 12; //Initializing the equation for the y-coordinate of the stationary object
+        double z = (double) q + y; //Initializing the equation for the z-coordinate of the stationary object
+        System.out.println("\nThe Cartesian coordinates of the first object is:" //Message introducing the first triplet
                 + "\n(" + x + ", " + y + ", " + z + ")");
 
-        double newX = x; //initializing the value of the x-coordinate of the nearest object
-        double newY = 12d * x; //initializing the value of the y-coordinate of the nearest object
-        double newZ = (double) q + newY * 6d; //initializing the value of the z-coordinate of the nearest object
-        System.out.println("The Cartesian coordinates of the nearest object is:" //message introducing the second triplet
+        double newX = x; //Initializing the value of the x-coordinate of the nearest object
+        double newY = 12d * x; //Initializing the value of the y-coordinate of the nearest object
+        double newZ = (double) q + newY * 6d; //Initializing the value of the z-coordinate of the nearest object
+        System.out.println("The Cartesian coordinates of the nearest object is:" //Message introducing the second triplet
                 + "\n(" + newX + ", " + newY + ", " + newZ + ")");
 
-        System.out.println("\nThank you for your contribution to this Space Project."); //closing message announcing the end of the program
-    }
-}
+        System.out.println("\nThank you for your contribution to this Space Project."); //Closing message announcing the end of the program
+    } //End of the findCoords method
+} //End of the class
