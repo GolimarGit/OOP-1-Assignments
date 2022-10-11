@@ -1,0 +1,86 @@
+package comp248.concordia;
+
+/* -------------------------------------------------------
+   Assignment 2
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+public class A2_Q1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+                + "\nWelcome to My City Recycling Program:"
+                + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
+                + "\nItem Recycling Code. |--> Item Samples"
+                + "\n------------------------------------"
+                + "\n1. |-->[Soft drink bottles/Trash cans]\n2. |-->[Shampoo bottles/Yogurt containers]"
+                + "\n3. |-->[Plastic bags]\n4. |-->[Storage bins/Brooms/Brushes]"
+                + "\n5. |-->[Garden hoses/Piping]\n6. |-->[Carry-out food containers]"
+                + "\n7. |-->[Plastics straws/Chip bags/Coffee pods]\n8. |-->[Cell phone/Computer/Camera/Batteries]"
+                + "\n9. |-->[TV Remote/Flashlight batteries]\n10.|-->[Car batteries]"
+                + "\n11.|-->[Cereal/Snack Cardboard boxes]\n12.|-->[Newspaper/Books/Wallpaper]"
+                + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        System.out.print("Please enter the Recycling Code, from the above, that corresponds to the item you want to recycle: ");
+        int code = sc.nextInt();
+        recycle(code);
+    }
+
+    public static void recycle(int code) {
+        if(code < -128 || code > 127)
+            System.out.print("Error: Your recycling Code is not a valid integer between -128 to 127. "
+                    + "Kindly retry again!");
+        else {
+            switch (code) {
+                case 1:
+
+                case 2:
+
+                case 3:
+
+                case 4:
+
+                case 5:
+
+                case 11:
+
+                case 12:
+                    System.out.println("This is a Recycled Plastics/Paper item."
+                            + "\nItem required to be put in the blue household recycling bin.");
+                    break;
+
+                case 6:
+
+                case 7:
+                    System.out.println("This is a Non-Recycled Plastics item."
+                            + "\nItem required to be put in the gray household garbage bin");
+                    break;
+
+                case 8:
+
+                case 9:
+
+                case 10:
+                    System.out.println("This is a Batteries item."
+                            + "\nItem required to be taken to your local recycling depot or nearby store for disposal");
+                    break;
+
+                default:
+                    if (code > 12 && code < 128) {
+                        System.out.print("This item is N/A.\nItem code not handled by the city recycling system."
+                                + "\nKindly check the nearby city(ies) for possible availability.\n");
+                        break;
+                    }
+                    if (code > -129 && code < 1) {
+                        System.out.print("This is a Hazardous material.\nMaterial required to be put in a hazardous "
+                                + "dumpster diving.\nKindly check your area for the nearby one.\n");
+                        break;
+                    }
+            }
+            System.out.print("\nThank you for saving the planet!");
+        }
+    }
+}
