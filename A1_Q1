@@ -54,6 +54,6 @@ public class A1_Q1 {
         System.out.println("The Cartesian coordinates of the nearest object is:" //Message introducing the second triplet
                 + "\n(" + newX + ", " + newY + ", " + newZ + ")");
 
-        System.out.println("\nThank you for your contribution to this Space Project."); //Closing message announcing the end of the program
+        System.out.print("\nThank you for your contribution to this Space Project."); //Closing message announcing the end of the program
     } //End of the findCoords method
 } //End of the class
