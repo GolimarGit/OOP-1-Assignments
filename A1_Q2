@@ -51,6 +51,6 @@ public class A1_Q2 {
         System.out.println("\nThe corresponding value for x is: " + x); //Messages introducing the x and y values
         System.out.println("The corresponding value for y is: " + y);
 
-        System.out.println("\nThank you for using my bespoke Meteorological program!"); //Closing message announcing the end of the program
+        System.out.print("\nThank you for using my bespoke Meteorological program!"); //Closing message announcing the end of the program
     } //End of the convert method
 } //End of the class
