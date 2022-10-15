@@ -1,0 +1,134 @@
+package comp248.concordia;
+
+import java.util.Scanner;
+
+public class A2_Q2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Welcome to Farms Distribution Center Price Index Program:"
+                + "\n=========================================================\n"
+                + "\nPlease enter a Month and Market, respectively: ");
+        String month = sc.next();
+        String market = sc.next();
+        findIndex(month, market);
+    }
+
+    public static void findIndex(String month, String market) {
+        final double W = 1.4672;
+        double p = 0d;
+        double i;
+
+        switch(month.toLowerCase()) {
+            case "january":
+                switch(market.toLowerCase()) {
+                    case "domestic":
+                        p = 75.25;
+                        break;
+
+                    case "international":
+                        p = 24.75;
+                        break;
+
+                    default:
+                        System.out.println("Error: An invalid value has been entered for the 'Market' variable. Please retry again!");
+                }
+                break;
+
+            case "february domestic":
+                p = 62.86;
+                break;
+
+            case "february international":
+                p = 37.14;
+                break;
+
+            case "march domestic":
+                p = 54.78;
+                break;
+
+            case "march international":
+                p = 45.22;
+                break;
+
+            case "april domestic":
+                p = 68.46;
+                break;
+
+            case "april international":
+                p = 31.54;
+                break;
+
+            case "may domestic":
+                p = 35.89;
+                break;
+
+            case "may international":
+                p = 54.11;
+                break;
+
+            case "june domestic":
+                p = 28.94;
+                break;
+
+            case "june international":
+                p = 71.06;
+                break;
+
+            case "july domestic":
+                p = 42.5;
+                break;
+
+            case "july international":
+                p = 57.5;
+                break;
+
+            case "august domestic":
+                p = 86.1;
+                break;
+
+            case "august international":
+                p = 13.9;
+                break;
+
+            case "september domestic":
+                p = 69.7;
+                break;
+
+            case "september international":
+                p = 30.3;
+                break;
+
+            case "october domestic":
+                p = 85.4;
+                break;
+
+            case "october international":
+                p = 14.6;
+                break;
+
+            case "november domestic":
+                p = 75.9;
+                break;
+
+            case "november international":
+                p = 24.1;
+                break;
+
+            case "december domestic":
+                p = 76.8;
+                break;
+
+            case "december international":
+                p = 23.2;
+                break;
+
+            default:
+                System.out.println("Error: An invalid value has been entered for the 'Month  ' variable. Please retry again!");
+        }
+
+        i = (p * W) / 20;
+        System.out.printf("\nThe value of the Price Index, 'I', is: %.2f", i);
+        System.out.print("\nThank you for using Farms Distribution Center Price Index Program!");
+    }
+}
