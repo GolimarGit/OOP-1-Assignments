@@ -8,12 +8,16 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
+/**
+ * @programDescription A recycling program that helps citizens of a city filter their waste into distinct recyclable
+ * materials and non-recyclable material with the ultimate goal of sustaining an environmental-friendly household.
+ */
 public class A2_Q1 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in); //Initializing a Scanner object
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
-                + "\nWelcome to My City Recycling Program:"
+                + "\nWelcome to My City Recycling Program:" //Print out a welcome message
                 + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++"
                 + "\nItem Recycling Code. |--> Item Samples"
                 + "\n------------------------------------"
@@ -24,17 +28,26 @@ public class A2_Q1 {
                 + "\n9. |-->[TV Remote/Flashlight batteries]\n10.|-->[Car batteries]"
                 + "\n11.|-->[Cereal/Snack Cardboard boxes]\n12.|-->[Newspaper/Books/Wallpaper]"
                 + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++\n");
+        //Prompting the user to enter the corresponding recycling [int] code for the item to be recycled or disposed of
         System.out.print("Please enter the Recycling Code, from the above, that corresponds to the item you want to recycle: ");
         int code = sc.nextInt();
-        recycle(code);
+        recycle(code); //Passing the code input to the recycle method
+        sc.close(); //Close the Scanner object to prevent memory leak.
     }
 
+    /**
+     * @methodDescription The recycle method takes the int input from the user and checks the corresponding item's
+     * specific recycling category (Recycled Plastics/Paper, Non-Recycled Plastics, Batteries, N/A or Hazardous material)
+     * and informs the user in which bin the item should be placed in.
+     * @param code The int code input from the user that corresponds to the desired item
+     */
     public static void recycle(int code) {
-        if(code < -128 || code > 127)
+        if(code < -128 || code > 127) //if statement for codes that exceed the size of a byte [-128, 127]
             System.out.print("Error: Your recycling Code is not a valid integer between -128 to 127. "
                     + "Kindly retry again!");
-        else {
-            switch (code) {
+        else { //Code block to be executed for valid int code inputs
+            switch(code) { //Cases separated in terms of which bin the item should be placed in
+                //Cases 1-5 (Recycled Plastics) and 11 & 12 (Paper) correspond to items that should be placed in the blue recycling bin
                 case 1:
 
                 case 2:
@@ -52,6 +65,7 @@ public class A2_Q1 {
                             + "\nItem required to be put in the blue household recycling bin.");
                     break;
 
+                //Cases 6 & 7 (Non-Recycled Plastics) correspond to items that should be placed in the gray garbage bin
                 case 6:
 
                 case 7:
@@ -59,6 +73,7 @@ public class A2_Q1 {
                             + "\nItem required to be put in the gray household garbage bin");
                     break;
 
+                //Cases 8-10 (Batteries) correspond to items that should be brought to appropriate recycling depots for disposal
                 case 8:
 
                 case 9:
@@ -68,19 +83,20 @@ public class A2_Q1 {
                             + "\nItem required to be taken to your local recycling depot or nearby store for disposal");
                     break;
 
+                //Default case for items that cannot be adequately processed and recycled (N/A and Hazardous items)
                 default:
-                    if (code > 12 && code < 128) {
+                    if(code > 12 && code < 128) {
                         System.out.print("This item is N/A.\nItem code not handled by the city recycling system."
                                 + "\nKindly check the nearby city(ies) for possible availability.\n");
                         break;
                     }
-                    if (code > -129 && code < 1) {
+                    if(code > -129 && code < 1) {
                         System.out.print("This is a Hazardous material.\nMaterial required to be put in a hazardous "
                                 + "dumpster diving.\nKindly check your area for the nearby one.\n");
                         break;
                     }
             }
-            System.out.print("\nThank you for saving the planet!");
+            System.out.print("\nThank you for saving the planet!"); //Print out closing message
         }
     }
 }
