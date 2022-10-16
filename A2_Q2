@@ -1,5 +1,11 @@
 package comp248.concordia;
 
+/* -------------------------------------------------------
+   Assignment 2
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
 import java.util.Scanner;
 
 public class A2_Q2 {
@@ -19,115 +25,122 @@ public class A2_Q2 {
         double p = 0d;
         double i;
 
-        switch(month.toLowerCase()) {
-            case "january":
-                switch(market.toLowerCase()) {
-                    case "domestic":
+        switch(market.toLowerCase()) {
+            case "domestic":
+                switch(month.toLowerCase()) {
+                    case "january":
                         p = 75.25;
                         break;
 
-                    case "international":
-                        p = 24.75;
+                    case "february":
+                        p = 62.86;
+                        break;
+
+                    case "march":
+                        p = 54.78;
+                        break;
+
+                    case "april":
+                        p = 68.46;
+                        break;
+
+                    case "may":
+                        p = 35.89;
+                        break;
+
+                    case "june":
+                        p = 28.94;
+                        break;
+
+                    case "july":
+                        p = 42.5;
+                        break;
+
+                    case "august":
+                        p = 86.1;
+                        break;
+
+                    case "september":
+                        p = 69.7;
+                        break;
+
+                    case "october":
+                        p = 85.4;
+                        break;
+
+                    case "november":
+                        p = 75.9;
+                        break;
+
+                    case "december":
+                        p = 76.8;
                         break;
 
                     default:
-                        System.out.println("Error: An invalid value has been entered for the 'Market' variable. Please retry again!");
+                        System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
                 }
                 break;
 
-            case "february domestic":
-                p = 62.86;
+            case "international":
+                switch(month.toLowerCase()) {
+                    case "january":
+                        p = 24.75;
+                        break;
+
+                    case "february":
+                        p = 37.14;
+                        break;
+
+                    case "march":
+                        p = 45.22;
+                        break;
+
+                    case "april":
+                        p = 31.54;
+                        break;
+
+                    case "may":
+                        p = 64.11;
+                        break;
+
+                    case "june":
+                        p = 71.06;
+                        break;
+
+                    case "july":
+                        p = 57.5;
+                        break;
+
+                    case "august":
+                        p = 13.9;
+                        break;
+
+                    case "september":
+                        p = 30.3;
+                        break;
+
+                    case "october":
+                        p = 14.6;
+                        break;
+
+                    case "november":
+                        p = 24.1;
+                        break;
+
+                    case "december":
+                        p = 23.2;
+                        break;
+
+                    default:
+                        System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
+                }
                 break;
 
-            case "february international":
-                p = 37.14;
-                break;
-
-            case "march domestic":
-                p = 54.78;
-                break;
-
-            case "march international":
-                p = 45.22;
-                break;
-
-            case "april domestic":
-                p = 68.46;
-                break;
-
-            case "april international":
-                p = 31.54;
-                break;
-
-            case "may domestic":
-                p = 35.89;
-                break;
-
-            case "may international":
-                p = 54.11;
-                break;
-
-            case "june domestic":
-                p = 28.94;
-                break;
-
-            case "june international":
-                p = 71.06;
-                break;
-
-            case "july domestic":
-                p = 42.5;
-                break;
-
-            case "july international":
-                p = 57.5;
-                break;
-
-            case "august domestic":
-                p = 86.1;
-                break;
-
-            case "august international":
-                p = 13.9;
-                break;
-
-            case "september domestic":
-                p = 69.7;
-                break;
-
-            case "september international":
-                p = 30.3;
-                break;
-
-            case "october domestic":
-                p = 85.4;
-                break;
-
-            case "october international":
-                p = 14.6;
-                break;
-
-            case "november domestic":
-                p = 75.9;
-                break;
-
-            case "november international":
-                p = 24.1;
-                break;
-
-            case "december domestic":
-                p = 76.8;
-                break;
-
-            case "december international":
-                p = 23.2;
-                break;
-
-            default:
-                System.out.println("Error: An invalid value has been entered for the 'Month  ' variable. Please retry again!");
+                default:
+                    System.out.println("Error: An invalid value has been entered for the 'Market' variable. Please retry again!");
         }
 
-        i = (p * W) / 20;
+        i = (p * W) / 20d;
         System.out.printf("\nThe value of the Price Index, 'I', is: %.2f", i);
         System.out.print("\nThank you for using Farms Distribution Center Price Index Program!");
     }
