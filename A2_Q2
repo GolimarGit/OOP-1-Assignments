@@ -8,23 +8,40 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
+/**
+ * @programDescription A program that calculates the desired corresponding monthly price index I (based on the equation
+ * specified in the Assignment Instructions) for the farms' distribution center for the domestic or international market
+ * depending on the user's input.
+ */
 public class A2_Q2 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Welcome to Farms Distribution Center Price Index Program:"
+        Scanner sc = new Scanner(System.in); //Initialize Scanner object
+        System.out.print("Welcome to Farms Distribution Center Price Index Program:" //Print out welcome message
                 + "\n=========================================================\n"
-                + "\nPlease enter a Month and Market, respectively: ");
-        String month = sc.next();
+                + "\nPlease enter a Month and Market, respectively: "); //Prompt the user to enter a desired month and market
+        String month = sc.next(); //Separating the user input into month and market variables
         String market = sc.next();
-        findIndex(month, market);
+        findIndex(month, market); //Passing the month and market inputs to the findIndex method
+        sc.close(); //Close the Scanner object to prevent memory leak
     }
 
+    /**
+     * @methodDescription The findIndex method takes the month and market inputs to find the specified percentage of
+     * harvest P to be used in the calculation of the price index I
+     * @param month The month of the user's desired price index
+     * @param market The market of the user's desired price index
+     */
     public static void findIndex(String month, String market) {
-        final double W = 1.4672;
-        double p = 0d;
-        double i;
+        final double W = 1.4672; //Initialize constant value W: the estimate of the initial production
+        double p = 0d; //Initialize the value p that will change depending on the user's input
 
+        /*
+        The switch case used to assign the correct numerical value of p.
+        First, the method identifies the desired market (domestic or international) from the market input.
+        Second, the method identifies the desired month from the market input.
+        The variable p is then set to its corresponding value
+         */
         switch(market.toLowerCase()) {
             case "domestic":
                 switch(month.toLowerCase()) {
@@ -76,6 +93,7 @@ public class A2_Q2 {
                         p = 76.8;
                         break;
 
+                    //Default case for an invalid month input
                     default:
                         System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
                 }
@@ -131,17 +149,19 @@ public class A2_Q2 {
                         p = 23.2;
                         break;
 
+                    //Default case for an invalid month input
                     default:
                         System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
                 }
                 break;
 
+                //Default case for an invalid market input
                 default:
                     System.out.println("Error: An invalid value has been entered for the 'Market' variable. Please retry again!");
         }
 
-        i = (p * W) / 20d;
-        System.out.printf("\nThe value of the Price Index, 'I', is: %.2f", i);
-        System.out.print("\nThank you for using Farms Distribution Center Price Index Program!");
+        double i = (p * W) / 20d; //Initializing the price index
+        System.out.printf("\nThe value of the Price Index, 'I', is: %.2f", i); //Display the calculated price index
+        System.out.print("\nThank you for using Farms Distribution Center Price Index Program!"); //Print out closing message
     }
 }
