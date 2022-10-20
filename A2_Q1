@@ -46,8 +46,10 @@ public class A2_Q1 {
             System.out.print("Error: Your recycling Code is not a valid integer between -128 to 127. "
                     + "Kindly retry again!");
         else { //Code block to be executed for valid int code inputs
-            switch(code) { //Cases separated in terms of which bin the item should be placed in
-                //Cases 1-5 (Recycled Plastics) and 11 & 12 (Paper) correspond to items that should be placed in the blue recycling bin
+            switch(code) { /*Cases separated in terms of which bin the item should be placed in
+                Cases 1-5 (Recycled Plastics) and 11 & 12 (Paper) correspond to items that should be placed in the blue recycling bin
+                Because case 1 does not contain any code, it will automatically execute case 2, and so on, until it reaches
+                case 12 where it will execute the specified code (for items to be placed in the blue recycling bin).*/
                 case 1:
 
                 case 2:
@@ -70,7 +72,7 @@ public class A2_Q1 {
 
                 case 7:
                     System.out.println("This is a Non-Recycled Plastics item."
-                            + "\nItem required to be put in the gray household garbage bin");
+                            + "\nItem required to be put in the gray household garbage bin.");
                     break;
 
                 //Cases 8-10 (Batteries) correspond to items that should be brought to appropriate recycling depots for disposal
@@ -80,7 +82,7 @@ public class A2_Q1 {
 
                 case 10:
                     System.out.println("This is a Batteries item."
-                            + "\nItem required to be taken to your local recycling depot or nearby store for disposal");
+                            + "\nItem required to be taken to your local recycling depot or nearby store for disposal.");
                     break;
 
                 //Default case for items that cannot be adequately processed and recycled (N/A and Hazardous items)
