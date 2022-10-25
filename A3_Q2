@@ -1,0 +1,21 @@
+package comp248.concordia;
+
+/* -------------------------------------------------------
+   Assignment 3
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+public class A3_Q2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to the Simple Electronic Voting System (SEVS)"
+                + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                + "\nPlease Enter a String collection of electoral candidates below:");
+        String input = sc.nextLine();
+        sc.close();
+    }
+}
