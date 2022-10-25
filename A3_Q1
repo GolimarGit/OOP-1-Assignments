@@ -1,0 +1,22 @@
+package comp248.concordia;
+
+/* -------------------------------------------------------
+   Assignment 3
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+public class A3_Q1 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Welcome to the 3D-Space Encryption-Decryption Program:"
+                + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+                + "\nPlease enter your plain text below:");
+        String input = sc.nextLine();
+        System.out.println("Kindly find below your encrypted text output:");
+        sc.close();
+    }
+}
