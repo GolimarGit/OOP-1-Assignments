@@ -8,30 +8,30 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
-public class A3_Q2 {
+public class A3_Q1 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the Simple Electronic Voting System (SEVS):"
+        System.out.println("Welcome to the 3D-Space Encryption-Decryption Program:"
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-                + "\nPlease Enter a String collection of electoral candidates below:");
+                + "\nPlease enter your plain text below:");
         String input = sc.nextLine();
-        System.out.print("********************************" + "\n| Code >> Description\t\t   |"
-                + "\n********************************\n|  1   >> Display Candidates   |"
-                + "\n|  2   >> Vote a new candidate |\n|  3   >> Add new candidate(s) |"
-                + "\n|  4   >> Display results\t   |\n|  0   >> End SEVS\t\t\t   |\n********************************"
-                + "\n\nEnter a code, from the aforementioned, that corresponds to your task: ");
-        int code = sc.nextInt();
 
-        switch(code) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 0:
-                System.out.print("Thank you for using our Simple Electronic Voting System (SEVS).");
-                System.exit(0);
+        char nextChar;
+        if(input.length() % 2 == 0) {
+            for(int i = 0; i < input.length()-1; i++) {
+                nextChar = input.charAt(i + 1);
+                input.replace(input.charAt(i), nextChar);
+            }
         }
+        if(input.length() % 2 != 0) {
+            for(int i = 1; i < input.length()-1; i++) {
+                nextChar = input.charAt(i + 1);
+                input.replace(input.charAt(i), nextChar);
+            }
+        }
+        System.out.print("Kindly find below your encrypted text output:\n" + input
+                + "\n\nThank you for your contribution to this Space Project.");
         sc.close();
     }
 }
