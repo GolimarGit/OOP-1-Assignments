@@ -17,20 +17,24 @@ public class A3_Q1 {
                 + "\nPlease enter your plain text below:");
         String input = sc.nextLine();
 
-        char nextChar;
+        char[] inputArray = input.toCharArray();
+        char oldChar;
         if(input.length() % 2 == 0) {
-            for(int i = 0; i < input.length()-1; i++) {
-                nextChar = input.charAt(i + 1);
-                input.replace(input.charAt(i), nextChar);
+            for(int i = 0; i < inputArray.length; i += 2) {
+                oldChar = inputArray[i];
+                inputArray[i] = inputArray[i+1];
+                inputArray[i+1] = oldChar;
             }
         }
         if(input.length() % 2 != 0) {
-            for(int i = 1; i < input.length()-1; i++) {
-                nextChar = input.charAt(i + 1);
-                input.replace(input.charAt(i), nextChar);
+            for(int i = 1; i < inputArray.length; i += 2) {
+                oldChar = inputArray[i];
+                inputArray[i] = inputArray[i+1];
+                inputArray[i+1] = oldChar;
             }
         }
-        System.out.print("Kindly find below your encrypted text output:\n" + input
+        String ciphertext = new String(inputArray);
+        System.out.print("\nKindly find below your encrypted text output:\n" + ciphertext
                 + "\n\nThank you for your contribution to this Space Project.");
         sc.close();
     }
