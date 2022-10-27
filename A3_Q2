@@ -12,10 +12,26 @@ public class A3_Q2 {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the Simple Electronic Voting System (SEVS)"
-                + "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
+        System.out.println("Welcome to the Simple Electronic Voting System (SEVS):"
+                + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "\nPlease Enter a String collection of electoral candidates below:");
         String input = sc.nextLine();
+        System.out.print("********************************" + "\n| Code >> Description\t\t   |"
+                + "\n********************************\n|  1   >> Display Candidates   |"
+                + "\n|  2   >> Vote a new candidate |\n|  3   >> Add new candidate(s) |"
+                + "\n|  4   >> Display results\t   |\n|  0   >> End SEVS\t\t\t   |\n********************************"
+                + "\n\nEnter a code, from the aforementioned, that corresponds to your task: ");
+        int code = sc.nextInt();
+
+        switch(code) {
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 0:
+                System.out.print("Thank you for using our Simple Electronic Voting System (SEVS).");
+                System.exit(0);
+        }
         sc.close();
     }
 }
