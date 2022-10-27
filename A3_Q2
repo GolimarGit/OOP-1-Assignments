@@ -16,22 +16,35 @@ public class A3_Q2 {
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "\nPlease Enter a String collection of electoral candidates below:");
         String input = sc.nextLine();
-        System.out.print("********************************" + "\n| Code >> Description\t\t   |"
-                + "\n********************************\n|  1   >> Display Candidates   |"
-                + "\n|  2   >> Vote a new candidate |\n|  3   >> Add new candidate(s) |"
-                + "\n|  4   >> Display results\t   |\n|  0   >> End SEVS\t\t\t   |\n********************************"
-                + "\n\nEnter a code, from the aforementioned, that corresponds to your task: ");
-        int code = sc.nextInt();
+        String[] inputArray = input.split(";");
 
-        switch(code) {
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 0:
-                System.out.print("Thank you for using our Simple Electronic Voting System (SEVS).");
-                System.exit(0);
+        boolean resume = true;
+        do {
+            System.out.print("********************************" + "\n| Code >> Description\t\t   |"
+                    + "\n********************************\n|  1   >> Display Candidates   |"
+                    + "\n|  2   >> Vote a new candidate |\n|  3   >> Add new candidate(s) |"
+                    + "\n|  4   >> Display results\t   |\n|  0   >> End SEVS\t\t\t   |\n********************************"
+                    + "\n\nEnter a code, from the aforementioned, that corresponds to your task: ");
+            int code = sc.nextInt();
+
+            switch (code) {
+                case 1:
+                    System.out.println("****************************************"
+                            + "\n| ID >> Candidate's Name               |\n****************************************");
+                    for (int i = 0; i < inputArray.length; i++) {
+                        System.out.println("| " + inputArray[i]);
+                    }
+                    System.out.println("****************************************");
+                    break;
+                case 2:
+                case 3:
+                case 4:
+                case 0:
+                    System.out.print("Thank you for using our Simple Electronic Voting System (SEVS).");
+                    resume = false;
+            }
         }
+        while(resume);
         sc.close();
     }
 }
