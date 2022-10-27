@@ -16,7 +16,19 @@ public class A3_Q2 {
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "\nPlease Enter a String collection of electoral candidates below:");
         String input = sc.nextLine();
-        String[] inputArray = input.split(";");
+        String[] inputArray = input.split(",|;");
+        String[] namesArray = new String[inputArray.length / 2];
+        String[] strIdArray = new String[inputArray.length / 2];
+        int j = 0;
+        for (int i = 0; j < inputArray.length; i++) {
+            strIdArray[i] = inputArray[j];
+            j += 2;
+        }
+        int k = 1;
+        for (int i = 0; k < inputArray.length; i++) {
+            namesArray[i] = inputArray[k];
+            k += 2;
+        }
 
         boolean resume = true;
         do {
@@ -31,8 +43,8 @@ public class A3_Q2 {
                 case 1:
                     System.out.println("****************************************"
                             + "\n| ID >> Candidate's Name               |\n****************************************");
-                    for (int i = 0; i < inputArray.length; i++) {
-                        System.out.println("| " + inputArray[i]);
+                    for (int i = 0; i < strIdArray.length; i++) {
+                        System.out.println("| " + strIdArray[i] + " >> " + namesArray[i]);
                     }
                     System.out.println("****************************************");
                     break;
@@ -44,7 +56,7 @@ public class A3_Q2 {
                     resume = false;
             }
         }
-        while(resume);
+        while (resume);
         sc.close();
     }
 }
