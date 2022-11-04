@@ -15,23 +15,23 @@ public class A3_Q2 {
         System.out.println("Welcome to the Simple Electronic Voting System (SEVS):"
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "\nPlease Enter a String collection of electoral candidates below:");
-        String firstBatch = sc.nextLine().toUpperCase();
-        String[] fBArray = firstBatch.split(",|;");
-        String[] names = new String[fBArray.length/2];
-        String[] ids = new String[fBArray.length/2];
+        String firstCandidates = sc.nextLine().toUpperCase();
+        String[] fCArray = firstCandidates.split(",|;");
+        String[] names = new String[fCArray.length/2];
+        String[] ids = new String[fCArray.length/2];
 
         int[] tally;
 
         //Add all even-numbered elements of the inputArray (ID numbers only) to the ID array
         int j = 0;
-        for(int i = 0; j < fBArray.length; i++) {
-            ids[i] = fBArray[j];
+        for(int i = 0; j < fCArray.length; i++) {
+            ids[i] = fCArray[j];
             j += 2;
         }
         //Add all odd-numbered elements of the inputArray (names only) to the namesArray
         int k = 1;
-        for(int i = 0; k < fBArray.length; i++) {
-            names[i] = fBArray[k];
+        for(int i = 0; k < fCArray.length; i++) {
+            names[i] = fCArray[k];
             k += 2;
         }
 
@@ -109,8 +109,9 @@ public class A3_Q2 {
                         names[tempNames.length+i] = newNames[i];
                     }
                     //At this point, both old and new names are all in one array (names)
+                    
                     System.out.print("Successfully added a NEW set of electoral candidates to the Simple Electronic "
-                            + "Voting System (SEVS)\n\n" + reEnter);
+                            + "Voting System (SEVS).\n\n" + reEnter);
                     break;
 
                 case "4":
@@ -118,6 +119,10 @@ public class A3_Q2 {
                 case "0":
                     System.out.print("\nThank you for using our Simple Electronic Voting System (SEVS).");
                     resume = false;
+                    break;
+
+                default:
+                    System.out.print("\n" + reEnter);
             }
         }
         while(resume);
