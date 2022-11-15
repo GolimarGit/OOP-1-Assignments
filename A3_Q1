@@ -8,34 +8,38 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
+/**
+ * @programDescription An encryption program that swaps around the characters of a String input and returns a ciphertext
+ * of the original input.
+ */
 public class A3_Q1 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the 3D-Space Encryption-Decryption Program:"
+        Scanner sc = new Scanner(System.in); //Initialize a Scanner object.
+        System.out.println("Welcome to the 3D-Space Encryption-Decryption Program:" //Print out a welcome message.
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
                 + "\nPlease enter your plain text below:");
-        String input = sc.nextLine().trim();
+        String input = sc.nextLine().trim(); //Store the Scanner input into a String variable.
 
-        char[] inputArray = input.toCharArray();
-        char oldChar;
-        if(input.length() % 2 == 0) {
-            for(int i = 0; i < inputArray.length; i += 2) {
+        char[] inputArray = input.toCharArray(); //Turn the Scanner input into a char array.
+        char oldChar; //Declare a temporary char variable to store the previous char of the inputArray during the encryption process.
+        if(input.length() % 2 == 0) { //Condition for the even-numbered encryption algorithm
+            for(int i = 0; i < inputArray.length; i += 2) { //Iterate through the inputArray through even-numbered bounds.
+                oldChar = inputArray[i]; //Store the previous char into the temporary char variable.
+                inputArray[i] = inputArray[i+1]; //Set the current char value as the following char.
+                inputArray[i+1] = oldChar; //Set the following char value as the old char.
+            }
+        }
+        if(input.length() % 2 != 0) { //Condition for the odd-numbered encryption algorithm
+            for(int i = 1; i < inputArray.length; i += 2) { //Iterate through the inputArray through odd-numbered bounds.
                 oldChar = inputArray[i];
                 inputArray[i] = inputArray[i+1];
                 inputArray[i+1] = oldChar;
             }
         }
-        if(input.length() % 2 != 0) {
-            for(int i = 1; i < inputArray.length; i += 2) {
-                oldChar = inputArray[i];
-                inputArray[i] = inputArray[i+1];
-                inputArray[i+1] = oldChar;
-            }
-        }
-        String ciphertext = new String(inputArray);
-        System.out.print("\nKindly find below your encrypted text output:\n" + ciphertext
-                + "\n\nThank you for your contribution to this Space Project.");
-        sc.close();
+        String ciphertext = new String(inputArray); //Set the String variable ciphertext as the recently shuffled inputArray.
+        System.out.print("\nKindly find below your encrypted text output:\n" + ciphertext //Print out the ciphertext.
+                + "\n\nThank you for your contribution to this Space Project."); //Print out a closing message.
+        sc.close(); //Close the Scanner object to prevent memory leak.
     }
 }
