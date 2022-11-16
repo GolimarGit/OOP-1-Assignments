@@ -9,8 +9,8 @@ package comp248.concordia;
 import java.util.Scanner;
 
 /**
- * @programDescription An encryption program that swaps around the characters of a String input and returns a ciphertext
- * of the original input.
+ * @programDescription An encryption program that swaps around the characters of a String input and returns the encrypted
+ * version of the original input.
  */
 public class A3_Q1 {
 
