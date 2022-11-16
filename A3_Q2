@@ -8,190 +8,227 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
+/**
+ * @programDescription The Simple Electronic Voting System (SEVS) is a voting simulator containing basic functions that
+ * simulate an electoral campaign: displaying candidates' names, voting for candidates, adding candidates and displaying
+ * results.
+ */
 public class A3_Q2 {
 
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Welcome to the Simple Electronic Voting System (SEVS):"
+        Scanner sc = new Scanner(System.in); //Initialize a Scanner object.
+        System.out.println("Welcome to the Simple Electronic Voting System (SEVS):" //Print out a welcome message.
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-                + "\nPlease Enter a String collection of electoral candidates below:");
-        String firstCandidates = sc.nextLine().toUpperCase();
-        String[] fCArray = firstCandidates.split(",|;");
-        String[] names = new String[fCArray.length/2];
-        String[] ids = new String[fCArray.length/2];
+                + "\nPlease Enter a String collection of electoral candidates below:"); //Prompt the user to enter a String of candidates' IDs and names.
+        String firstCandidates = sc.nextLine().toUpperCase(); //Store the input in a String variable.
+        String[] fCArray = firstCandidates.split(",|;"); //Separate the input through ',' and ';' into different elements of a String array.
 
-        //Create a votes array to store the votes for the different candidates through their respective ID number
-        int[] votes = new int[ids.length];
+        //Create a 2D String array to store the candidates' information.
+        String[][] candidates = new String[2][fCArray.length/2];
 
-        //Add all even-numbered elements of the inputArray (ID numbers only) to the ID array
-        int j = 0;
-        for(int i = 0; j < fCArray.length; i++) {
-            ids[i] = fCArray[j];
-            j += 2;
-        }
-        //Add all odd-numbered elements of the inputArray (names only) to the namesArray
-        int k = 1;
+        //Create an int array to store the votes for the different candidates.
+        int[] votes = new int[candidates[0].length];
+
+        //Add all even-numbered elements of the inputArray (IDs only) to the first row of the candidates array.
+        int k = 0;
         for(int i = 0; k < fCArray.length; i++) {
-            names[i] = fCArray[k];
+            candidates[0][i] = fCArray[k].trim();
             k += 2;
         }
+        //Add all odd-numbered elements of the inputArray (names only) to the second row of the candidates array.
+        int l = 1;
+        for(int i = 0; l < fCArray.length; i++) {
+            candidates[1][i] = fCArray[l].trim();
+            l += 2;
+        }
 
-        boolean resume = true;
-        System.out.print("********************************" + "\n| Code >> Description\t\t   |"
+        boolean resume = true; //Initialize the looping condition for the SEVS.
+        System.out.print("********************************" + "\n| Code >> Description\t\t   |" //Print out valid commands.
                 + "\n********************************\n|  1   >> Display Candidates   |"
                 + "\n|  2   >> Vote a new candidate |\n|  3   >> Add new candidate(s) |"
                 + "\n|  4   >> Display results\t   |\n|  0   >> End SEVS\t\t\t   |\n********************************"
                 + "\n\nEnter a code, from the aforementioned, that corresponds to your task: ");
+        //Create a continue message that prompts the user to input another command.
         String reEnter = "Kindly continue by entering a valid code, from the aforementioned, that corresponds to your task: ";
 
         do {
-            String code = sc.nextLine();
-            switch (code) {
+            String code = sc.nextLine(); //Store the input command in a String variable.
+            switch(code) {
+                /** Display candidates */
                 case "1":
-                    String c1format = "| %-2s >> %-30s |";
+                    String c1format = "| %-2s >> %-30s |"; //String format for displaying the current candidates
                     System.out.println("****************************************"
                             + "\n| ID >> Candidate's Name               |\n****************************************");
-                    for(int i = 0; i < ids.length; i++) {
-                        System.out.println(String.format(c1format, ids[i].trim(), names[i].trim()));
+                    for(int i = 0; i < candidates[0].length; i++) { //Iterate through the candidates array.
+                        System.out.println(String.format(c1format, candidates[0][i], candidates[1][i])); //Print out the candidates' ID and name.
                     }
+                    //Prompt the user to enter a new command.
                     System.out.print("****************************************\n\n" + reEnter);
                     break;
 
+                /** Vote a candidate */
                 case "2":
-                    System.out.print("\nPlease enter the ID of the candidates you with to vote for: ");
-                    String wantedId = sc.next();
-                    int pos = 0; //Declare int variable pos for referencing corresponding elements in all 3 arrays
-                    //Iterate through ids to find the position in which the desired ID is stored in the array
-                    for(int i = 0; i < ids.length; i++) {
-                        if(ids[i].equals(wantedId)) { //!!!votes keep going to the first element!!!
-                            pos = i; //assign the index to the reference position
+                    /** Voting algorithm */
+                    boolean idFound = false; //Initialize the looping condition for the voting algorithm.
+                    do {
+                        System.out.print("\nPlease enter the ID of the candidates you with to vote for: "); //Prompt the user to vote for a candidate.
+                        String wantedId = sc.next().trim(); //Store the input ID in a String.
+                        //Iterate through the IDs of the candidates array to find the position in which the desired ID is stored in.
+                        for(int i = 0; i < votes.length; i++) {
+                            if(wantedId.equals(candidates[0][i])) {
+                                votes[i]++; //Add a vote to the corresponding candidate.
+                                idFound = true; //Negate the looping condition for the voting algorithm.
+                                //Print out a success message and prompt the user to enter a new command.
+                                System.out.print("Your ballot has been successfully casted for: " + candidates[1][i]
+                                        + " bearing Candidate ID: " + candidates[0][i] + "\n");
+                                break; //Break out of the loop once a vote has been added.
+                            }
                         }
                     }
-                    System.out.println("pos is " + pos);
-                    votes[pos] += 1; //Adding a vote to the corresponding votes element
-                    System.out.println("kiettttt t'as voté pour " + ids[pos] + names[pos]);
+                    while(!idFound);
 
-                    /**
-                     * Sorting all 3 arrays
-                     */
-//                    int m = 0;
-//                    String tempName;
-//                    for(int i = 1; i < votes.length; i++) {
-//                        //Sorting the votes array
-//                        if(votes[m] < votes[i]) {
-//                            int tempVote = votes[m]; //store current value in temporary variable
-//                            votes[m] = votes[i]; //current value now becomes the next value (larger value)
-//                            votes[i] = tempVote; //next value swaps with previous value (smaller value)
-//                        }
-//                        m++;
-//                    }
-                    //Sorting the votes array
-                    int newPos; //Declare int variable newPos for referencing the new position of the ID in the array
-                    for(int i = 0; i < votes.length-1; i++) {
-                        while(votes[i] < votes[i+1]) {
-                            int tempVote = votes[i]; //store current value in temporary variable
-                            votes[i] = votes[i+1]; //current value now becomes the next value (larger value)
-                            votes[i+1] = tempVote; //next value swaps with previous value (smaller value)
-                            newPos = i;
+                    /** Sorting algorithm */
+                    boolean sorted = false; //Initialize the looping condition for the sorting algorithm.
+                    while(!sorted) {
+                        for(int i = 1; i < votes.length; i++) { //Iterate through the votes array.
+                            //Swap the elements of the corresponding arrays if the current element in the votes array is greater than the previous element.
+                            if(votes[i] > votes[i-1]) {
+                                //Swap the number of votes
+                                int tempVote = votes[i-1]; //Store the previous votes element in a temporary int variable.
+                                votes[i-1] = votes[i]; //The previous votes element becomes the current element.
+                                votes[i] = tempVote; //Set the current votes element as the previous element.
+
+                                //Swap the ID and the name
+                                String tempId = candidates[0][i-1]; //Store the previous ID in a temporary String variable.
+                                String tempName = candidates[1][i-1]; //Store the previous name in a temporary String variable.
+
+                                candidates[0][i-1] = candidates[0][i]; //The previous ID becomes the current ID.
+                                candidates[1][i-1] = candidates[1][i]; //The previous name becomes the current name.
+
+                                candidates[0][i] = tempId; //Set the current ID as the previous ID.
+                                candidates[1][i] = tempName; //Set the current name as the previous name.
+
+                                break;
+                            }
+                            if(i == votes.length-1) {
+                                sorted = true; //Negate the looping condition for the sorting algorithm.
+                            }
                         }
                     }
-                    String tempId = ids[pos]; //Store the recently voted for ID number in a temporary variable
 
                     break;
 
+                /** Add new candidate(s) */
                 case "3":
-                    //Prompt user to enter a String
+                    //Prompt the user to enter a String of candidates' IDs and names.
                     System.out.println("\nPlease enter a String collection of the NEW electoral candidates below:");
-                    String newCandidates = sc.nextLine().toUpperCase();
-                    String[] nCArray = newCandidates.split(",|;");
+                    String newCandidates = sc.nextLine().toUpperCase(); //Store the input in a String variable.
+                    String[] nCArray = newCandidates.split(",|;"); //Separate the input through ',' and ';' into different elements of a String array.
 
-                    //Create arrays for the new IDs, names and votes
+                    //Create new arrays for the new IDs, names and votes.
                     String[] newIds = new String[nCArray.length/2];
                     String[] newNames = new String[nCArray.length/2];
                     int[] newVotes = new int[newIds.length];
 
-                    //Copy old arrays
-                    String[] tempIds = ids.clone();
-                    String[] tempNames = names.clone();
-                    int[] tempVotes = votes.clone();
+                    //Copy the old candidates array into a temporary tempCandidates array.
+                    String[][] tempCandidates = new String[2][candidates[0].length];
+                    for(int i = 0; i < candidates.length; i++) {
+                        for(int j = 0; j < candidates[i].length; j++) {
+                            tempCandidates[i][j] = candidates[i][j];
+                        }
+                    }
 
-                    //Add all even-numbered elements of the nCArray (ID number only) to the newIds array
+                    //Extend the size of the candidates array to accommodate for new elements.
+                    candidates = new String[2][tempCandidates[0].length + newIds.length];
+
+                    //Copy the old votes array into a temporary tempVotes array.
+                    int[] tempVotes = new int[votes.length];
+                    for(int i = 0; i < votes.length; i++) {
+                        tempVotes[i] = votes[i];
+                    }
+
+                    //Extend the size of the votes array to accommodate for new elements.
+                    votes = new int[tempVotes.length + newVotes.length];
+
+                    //Add all even-numbered elements of the nCArray (ID number only) to the newIds array.
                     int b = 0;
                     for(int a = 0; b < nCArray.length; a++) {
-                        newIds[a] = nCArray[b];
+                        newIds[a] = nCArray[b].trim();
                         b += 2;
                     }
-                    //Add elements of both arrays into a single array
-                    ids = new String[tempIds.length + newIds.length];
-                    //Adding the old elements
-                    for(int i = 0; i < tempIds.length; i++) {
-                        ids[i] = tempIds[i];
+                    //Add the elements of both arrays into the first row of the candidates array (candidates[0]).
+                    //Adding the old IDs
+                    for(int i = 0; i < tempCandidates[0].length; i++) {
+                        candidates[0][i] = tempCandidates[0][i];
                     }
-                    //Adding the new elements
+                    //Adding the new IDs
                     for(int i = 0; i < newIds.length; i++) {
-                        ids[tempIds.length+i] = newIds[i];
+                        candidates[0][tempCandidates[0].length + i] = newIds[i];
                     }
-                    //At this point, both old and new IDs are all in one array (ids)
 
                     //Add all odd-numbered elements of the nCArray (names only) to the newNames array.
                     int c = 1;
                     for(int a = 0; c < nCArray.length; a++) {
-                        newNames[a] = nCArray[c];
+                        newNames[a] = nCArray[c].trim();
                         c += 2;
                     }
-                    //Add elements of both arrays into a single array
-                    names = new String[tempNames.length + newNames.length];
+                    //Add the elements of both arrays into the second row of the candidates array (candidates[1]).
                     //Adding the old names
-                    for(int i = 0; i < tempNames.length; i++) {
-                        names[i] = tempNames[i];
+                    for(int i = 0; i < tempCandidates[1].length; i++) {
+                        candidates[1][i] = tempCandidates[1][i];
                     }
                     //Adding the new names
                     for(int i = 0; i < newNames.length; i++) {
-                        names[tempNames.length+i] = newNames[i];
+                        candidates[1][tempCandidates[1].length + i] = newNames[i];
                     }
-                    //At this point, both old and new names are all in one array (names)
 
-                    //Add elements of both arrays into a single array
+                    //Add the elements of both votes arrays into a single array.
                     //Adding old votes
                     for(int i = 0; i < tempVotes.length; i++) {
                         votes[i] = tempVotes[i];
                     }
                     //Adding new votes
                     for(int i = 0; i < newVotes.length; i++) {
-                        votes[tempVotes.length+i] = newVotes[i];
+                        votes[tempVotes.length + i] = newVotes[i];
                     }
-                    //At this point, both old and new votes are in one array (votes)
 
+                    //Print out a success message and prompt the user to enter a new command.
                     System.out.print("Successfully added a NEW set of electoral candidates to the Simple Electronic "
                             + "Voting System (SEVS).\n\n" + reEnter);
                     break;
 
+                /** Display results */
                 case "4":
-                    String c4format = "| %8s | %13s | %2s | %-30s |";
+                    String c4format = "| %8s | %13s | %2s | %-30s |"; //String format for displaying the results
                     System.out.println("******************************************************************"
                             + "\n| Position | Votes/Ballots | ID | Candidate's Name\t\t\t\t |"
                             + "\n******************************************************************");
-                    //Display pertinent information
-                    int n = 1;
-                    for(int i = 0; i < votes.length; i++) {
-                        if(i != 0 && votes[i] != votes[i-1]) { //what if i exceeds the length of votes
-                            n++;
+
+                    int position = 1; //Initialize an int variable to display the position of each candidate.
+                    for(int i = 0; i < candidates[1].length; i++) { //Iterate through the candidates array.
+                        //Increment the position if the current candidate possesses more votes than the previous candidate.
+                        if(i != 0 && votes[i] != votes[i-1]) {
+                            position++;
                         }
-                        System.out.println(String.format(c4format, n, votes[i], ids[i].trim(), names[i].trim()));
+                        //Print out the candidates' position, ID, name and current number of votes.
+                        System.out.println(String.format(c4format, position, votes[i], candidates[0][i], candidates[1][i]));
                     }
+                    //Prompt the user to enter a new command.
                     System.out.print("******************************************************************\n\n" + reEnter);
                     break;
 
+                /** End SEVS */
                 case "0":
+                    //Print out a closing message.
                     System.out.print("\nThank you for using our Simple Electronic Voting System (SEVS).");
-                    resume = false;
+                    resume = false; //Negate the looping condition for the SEVS.
                     break;
 
                 default:
-                    System.out.print("\n" + reEnter);
+                    System.out.print("\n" + reEnter); //Prompt the user to enter a valid command.
             }
         }
         while(resume);
-        sc.close();
+        sc.close(); //Close the Scanner object to prevent memory leak.
     }
 }
