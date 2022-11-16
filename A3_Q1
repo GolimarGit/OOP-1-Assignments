@@ -18,8 +18,8 @@ public class A3_Q1 {
         Scanner sc = new Scanner(System.in); //Initialize a Scanner object.
         System.out.println("Welcome to the 3D-Space Encryption-Decryption Program:" //Print out a welcome message.
                 + "\n++++++++++++++++++++++++++++++++++++++++++++++++++++++\n"
-                + "\nPlease enter your plain text below:");
-        String input = sc.nextLine().trim(); //Store the Scanner input into a String variable.
+                + "\nPlease enter your plain text below:"); //Prompt the user to enter a String.
+        String input = sc.nextLine().trim(); //Store the Scanner input in a String variable.
 
         char[] inputArray = input.toCharArray(); //Turn the Scanner input into a char array.
         char oldChar; //Declare a temporary char variable to store the previous char of the inputArray during the encryption process.
