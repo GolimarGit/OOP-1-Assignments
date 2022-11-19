@@ -1,0 +1,100 @@
+package comp248.concordia;
+
+public class Fund {
+    static int loonies;
+    static int toonies;
+    static int fiveBills;
+    static int tenBills;
+    static int twentyBills;
+
+    public Fund() {
+
+    }
+
+    public Fund(int loonies, int toonies, int fiveBills, int tenBills, int twentyBills) {
+        this.loonies = loonies;
+        this.toonies = toonies;
+        this.fiveBills = fiveBills;
+        this.tenBills = tenBills;
+        this.twentyBills = twentyBills;
+    }
+
+    public Fund(Fund fund) {
+        this.loonies = fund.loonies;
+        this.toonies = fund.toonies;
+        this.fiveBills = fund.fiveBills;
+        this.tenBills = fund.tenBills;
+        this.twentyBills = fund.twentyBills;
+    }
+
+    public static int getLoonies() {
+        return loonies;
+    }
+
+    public static void setLoonies(int loonies) {
+        Fund.loonies = loonies;
+    }
+
+    public static int getToonies() {
+        return toonies;
+    }
+
+    public static void setToonies(int toonies) {
+        Fund.toonies = toonies;
+    }
+
+    public static int getFiveBills() {
+        return fiveBills;
+    }
+
+    public static void setFiveBills(int fiveBills) {
+        Fund.fiveBills = fiveBills;
+    }
+
+    public static int getTenBills() {
+        return tenBills;
+    }
+
+    public static void setTenBills(int tenBills) {
+        Fund.tenBills = tenBills;
+    }
+
+    public static int getTwentyBills() {
+        return twentyBills;
+    }
+
+    public static void setTwentyBills(int twentyBills) {
+        Fund.twentyBills = twentyBills;
+    }
+
+    public void addFund(int addLoonies, int addToonies, int addFiveBills, int addTenBills, int addTwentyBills) {
+        Fund.loonies += addLoonies;
+        Fund.toonies += addToonies;
+        Fund.fiveBills += addFiveBills;
+        Fund.tenBills += addTenBills;
+        Fund.twentyBills += addTwentyBills;
+    }
+
+    public int fundTotal() {
+        return Fund.loonies * 1 + Fund.toonies * 2 + Fund.fiveBills * 5 + Fund.tenBills * 10 + Fund.twentyBills * 20;
+    }
+
+    @Override
+    public String toString() {
+        return Fund.loonies + " loonies\n"
+                + Fund.toonies + " toonies\n"
+                + Fund.fiveBills + " $5 bills\n"
+                + Fund.tenBills + " $10 bills\n"
+                + Fund.twentyBills + " $20 bills";
+    }
+
+    public boolean equals(Fund fund1, Fund fund2) {
+        if(fund1.loonies == fund2.loonies && fund1.toonies == fund2.toonies && fund1.fiveBills == fund2.fiveBills
+                && fund1.tenBills == fund2.tenBills && fund1.twentyBills == fund2.twentyBills) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
