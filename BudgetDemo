@@ -1,0 +1,19 @@
+package comp248.concordia;
+
+public class BudgetDemo {
+
+    public static void main(String[] args) {
+        System.out.print("What would you like to do?"
+                + "\n   1. See the possessions of all householdBudgets"
+                + "\n   2. See the possessions of one householdBudget"
+                + "\n   3. List householdBudgets with same total amount of fund"
+                + "\n   4. List householdBudgets with fund denomination(s)"
+                + "\n   5. List householdBudgets with same total amount of fund and same number of expenses"
+                + "\n   6. Add am expense to an existing householdBudget"
+                + "\n   7. Remove an existing expense from a householdBudget"
+                + "\n   8. Update the payment due date of an existing expense"
+                + "\n   9. Add fund to a householdBudget"
+                + "\n   0. To quit"
+                + "\n\nPlease enter your choice and press <Enter>:");
+    }
+}
