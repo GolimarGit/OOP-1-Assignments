@@ -1,0 +1,41 @@
+package comp248.concordia;
+
+public class HouseholdBudget {
+    private Fund fund;
+    private Expense[] expenses;
+
+    public HouseholdBudget() {
+
+    }
+
+    public HouseholdBudget(Fund fund, Expense[] expenses) {
+        this.fund = fund;
+        this.expenses = expenses;
+    }
+
+    public boolean equalFundTotal(HouseholdBudget otherHouseholdBudget) {
+        if(this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public boolean equalFundAmount(HouseholdBudget otherHouseholdBudget) {
+        if(this.fund.equals(otherHouseholdBudget.fund)) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public double totalFunds() {
+        return this.fund.fundTotal();
+    }
+
+    public int nbOfExpenses(Expense[] expenses) {
+        return expenses.length;
+    }
+}
