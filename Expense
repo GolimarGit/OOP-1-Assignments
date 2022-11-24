@@ -1,0 +1,104 @@
+package comp248.concordia;
+
+public class Expense {
+    String expenseType;
+    double amount;
+    String businessName;
+    int dueMonth;
+    int dueDay;
+
+    public Expense() {
+
+    }
+
+    public Expense(String expenseType, double amount, String businessName, int dueMonth, int dueDay) {
+        this.expenseType = expenseType;
+        this.amount = amount;
+        this.businessName = businessName;
+        if(dueMonth < 1 || dueMonth > 12) {
+            this.dueMonth = 0;
+        }
+        else {
+            this.dueMonth = dueMonth;
+        }
+        if(dueDay < 1 || dueDay > 31) {
+            this.dueDay = 0;
+        }
+        else {
+            this.dueDay = dueDay;
+        }
+    }
+
+    public Expense(Expense expense) {
+        this.expenseType = expense.expenseType;
+        this.amount = expense.amount;
+        this.businessName = expense.businessName;
+        this.dueMonth = expense.dueMonth;
+        this.dueDay = expense.dueDay;
+    }
+
+    public String getExpenseType() {
+        return this.expenseType;
+    }
+
+    public double getAmount() {
+        return this.amount;
+    }
+
+    public String getBusinessName() {
+        return this.businessName;
+    }
+
+    public int getDueMonth() {
+        return this.dueMonth;
+    }
+
+    public void setDueMonth(int dueMonth) {
+        if(dueMonth < 1 || dueMonth > 12) {
+            this.dueMonth = 0;
+        }
+        else {
+            this.dueMonth = dueMonth;
+        }
+    }
+
+    public int getDueDay() {
+        return this.dueDay;
+    }
+
+    public void setDueDay(int dueDay) {
+        if(dueDay < 1 || dueDay > 31) {
+            this.dueDay = 0;
+        }
+        else {
+            this.dueDay = dueDay;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if(dueDay < 10 && dueMonth > 10) {
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/" + dueMonth;
+        }
+        else if(dueMonth < 10 && dueDay > 10) {
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/0" + dueMonth;
+        }
+        else if(dueDay < 10 && dueMonth < 10) {
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/0" + dueMonth;
+        }
+        else {
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/" + dueMonth;
+        }
+    }
+
+    public boolean equals(Expense otherExpense) {
+        if(this.expenseType.equals(otherExpense.expenseType) && this.amount == otherExpense.amount
+                && this.businessName.equals(otherExpense.businessName) && this.dueMonth == otherExpense.dueMonth
+                && this.dueDay == otherExpense.dueDay) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+}
