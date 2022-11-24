@@ -85,9 +85,9 @@ public class Fund {
                 + Fund.tenBills + " x $10) + (" + Fund.twentyBills + " x $20)";
     }
 
-    public boolean equals(Fund fund1, Fund fund2) {
-        if(fund1.loonies == fund2.loonies && fund1.toonies == fund2.toonies && fund1.fiveBills == fund2.fiveBills
-                && fund1.tenBills == fund2.tenBills && fund1.twentyBills == fund2.twentyBills) {
+    public boolean equals(Fund otherFund) {
+        if(Fund.loonies == otherFund.loonies && Fund.toonies == otherFund.toonies && Fund.fiveBills == otherFund.fiveBills
+                && Fund.tenBills == otherFund.tenBills && Fund.twentyBills == otherFund.twentyBills) {
             return true;
         }
         else {
