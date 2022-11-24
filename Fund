@@ -81,11 +81,8 @@ public class Fund {
 
     @Override
     public String toString() {
-        return Fund.loonies + " loonies\n"
-                + Fund.toonies + " toonies\n"
-                + Fund.fiveBills + " $5 bills\n"
-                + Fund.tenBills + " $10 bills\n"
-                + Fund.twentyBills + " $20 bills";
+        return "(" + Fund.loonies + " x $1) + (" + Fund.toonies + " x $2) + (" + Fund.fiveBills + " x $5) + ("
+                + Fund.tenBills + " x $10) + (" + Fund.twentyBills + " x $20)";
     }
 
     public boolean equals(Fund fund1, Fund fund2) {
