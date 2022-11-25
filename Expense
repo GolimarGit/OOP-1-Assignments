@@ -4,8 +4,8 @@ public class Expense {
     String expenseType;
     double amount;
     String businessName;
-    int dueMonth;
-    int dueDay;
+    int dueMonth; //should this be byte?
+    int dueDay; //should this be byte?
 
     public Expense() {
 
@@ -78,16 +78,16 @@ public class Expense {
     @Override
     public String toString() {
         if(dueDay < 10 && dueMonth > 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/" + dueMonth;
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/" + dueMonth + ".";
         }
         else if(dueMonth < 10 && dueDay > 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/0" + dueMonth;
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/0" + dueMonth + ".";
         }
         else if(dueDay < 10 && dueMonth < 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/0" + dueMonth;
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/0" + dueMonth + ".";
         }
         else {
-            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/" + dueMonth;
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/" + dueMonth + ".";
         }
     }
 
