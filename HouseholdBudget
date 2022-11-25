@@ -2,7 +2,7 @@ package comp248.concordia;
 
 public class HouseholdBudget {
     private Fund fund;
-    private Expense[] expenses;
+    private Expense[] expenses; //should this be initialized?
 
     public HouseholdBudget() {
 
@@ -35,7 +35,91 @@ public class HouseholdBudget {
         return this.fund.fundTotal();
     }
 
-    public int nbOfExpenses(Expense[] expenses) {
-        return expenses.length;
+    public int nbOfExpenses() {
+        return this.expenses.length;
+    }
+
+    public void addExpense(Expense expense) {
+        Expense[] oldExpenses = new Expense[this.expenses.length];
+        for(int i = 0; i < this.expenses.length; i++) {
+            oldExpenses[i] = this.expenses[i];
+        }
+
+        this.expenses = new Expense[oldExpenses.length+1];
+        for(int i = 0; i < oldExpenses.length; i++) {
+            this.expenses[i] = oldExpenses[i];
+        }
+
+        this.expenses[this.expenses.length-1] = expense;
+
+        if(this.expenses.length == 1) {
+            System.out.print("You now have " + this.expenses.length + " expense");
+        }
+        else {
+            System.out.print("You now have " + this.expenses.length + " expenses");
+        }
+    }
+
+    public void removeExpense(int index) {
+        if(this.expenses.length == 0) {
+            System.out.println("Sorry that HouseholdBudget has no expenses");
+        }
+        else {
+            Expense[] oldExpenses = new Expense[this.expenses.length];
+            for(int i = 0; i < this.expenses.length; i++) {
+                oldExpenses[i] = this.expenses[i];
+            }
+
+            this.expenses = new Expense[oldExpenses.length-1];
+            for(int i = 0; i < this.expenses.length; i++) {
+                if(i == index) {
+                    continue;
+                }
+                this.expenses[i] = oldExpenses[i];
+            }
+
+            System.out.print("Expense was removed successfully");
+        }
+    }
+
+    public void updateDueDate(int index, int day, int month) {
+        this.expenses[index].setDueDay(day);
+        this.expenses[index].setDueMonth(month);
+
+        System.out.println("Due Date updated.");
+    }
+
+    public void addFunds(int addLoonies, int addToonies, int addFiveBills, int addTenBills, int addTwentyBills) {
+        this.fund.addFund(addLoonies, addToonies, addFiveBills, addTenBills, addTwentyBills);
+        System.out.println("You now have $" + this.fund.fundTotal());
+    }
+
+    public boolean equals(HouseholdBudget otherHouseholdBudget) {
+        if(this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()
+                && this.expenses.length == otherHouseholdBudget.expenses.length) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        String output = this.fund.toString() + "\n";
+        if(this.expenses.length == 0) {
+            output += "No expenses";
+        }
+        else {
+            for(int i = 0; i < this.expenses.length; i++) {
+                output += this.expenses[i].toString();
+            }
+        }
+
+        return output;
+    }
+
+    public String fundBreakdown() {
+        return this.fund.toString();
     }
 }
