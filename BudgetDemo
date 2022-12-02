@@ -2,35 +2,40 @@ package comp248.concordia;
 
 import java.util.Scanner;
 
+/**
+ * @programDescription
+ */
 public class BudgetDemo {
 
     public static void main(String[] args) {
+        //Create a HouseholdBudget array to hold the 5 HouseholdBudget objects.
         HouseholdBudget[] hbs = new HouseholdBudget[5];
 
+        //Create 5 HouseholdBudget objects following the Assignment instructions.
         Fund fund1 = new Fund(0, 1, 0, 2, 1);
 
         hbs[0] = new HouseholdBudget(
                 fund1,
                 new Expense[] {
-                        new Expense("Purchase", 85.5, "IGA", 25, 11),
-                        new Expense("Bill", 122.75, "Videotron", 2, 12)
+                        new Expense("Purchase", 85.5, "IGA", 11, 25),
+                        new Expense("Bill", 122.75, "Videotron", 12, 2)
                 }
         );
 
         hbs[1] = new HouseholdBudget(
                 fund1,
                 new Expense[] {
-                        new Expense("Purchase", 85.5, "IGA", 25, 11),
-                        new Expense("Bill", 16.2, "Costco", 23, 11)
+                        new Expense("Purchase", 85.5, "IGA", 11, 25),
+                        new Expense("Bill", 16.2, "Costco", 11, 23)
                 }
         );
 
         hbs[2] = new HouseholdBudget(
                 new Fund(2, 0, 2, 1, 1),
                 new Expense[] {
-                        new Expense("Purchase", 50.75, "Pharmaprix", 1, 12),
-                        new Expense("Purchase", 16.2, "TheBay", 16, 12),
-                        new Expense("Bill", 65.85, "Fido", 5, 1)
+                        new Expense("Purchase", 50.75, "Pharmaprix", 12, 1),
+                        new Expense("Purchase", 16.2, "TheBay", 12, 16),
+                        new Expense("Bill", 65.85, "Fido", 1, 5)
                 }
         );
 
@@ -46,14 +51,15 @@ public class BudgetDemo {
                 new Expense[] { }
         );
 
-        Scanner sc = new Scanner(System.in);
-        boolean resume = true;
+        Scanner sc = new Scanner(System.in); //Initialize Scanner object.
+        boolean resume = true; //Initialize the looping condition for the Application.
         while(resume) {
+            //Print out the available choices and prompt the user to input their choice.
             System.out.print("What would you like to do?"
                     + "\n   1. See the possessions of all householdBudgets"
                     + "\n   2. See the possessions of one householdBudget"
                     + "\n   3. List householdBudgets with same total amount of fund"
-                    + "\n   4. List householdBudgets with fund denomination(s)"
+                    + "\n   4. List householdBudgets with same fund denomination(s)"
                     + "\n   5. List householdBudgets with same total amount of fund and same number of expenses"
                     + "\n   6. Add am expense to an existing householdBudget"
                     + "\n   7. Remove an existing expense from a householdBudget"
@@ -62,12 +68,183 @@ public class BudgetDemo {
                     + "\n   0. To quit"
                     + "\n\nPlease enter your choice and press <Enter>:");
 
-            int choice = sc.nextInt();
+            int choice = sc.nextInt(); //Store user input in an int variable.
             switch(choice) {
+                /** See the possessions of all HouseholdBudget objects */
                 case 1:
                     System.out.println("Content of each HouseholdBudget:\n---------------------");
                     for(int i = 0; i < hbs.length; i++) {
-                        System.out.println("HouseholdBudget #" + i + ":\n" + hbs[i].toString() + "\n");
+                        System.out.println("HouseholdBudget #" + i + ":\n" + hbs[i].toString());
+                    }
+                    System.out.println();
+                    break;
+
+                case 2:
+                    System.out.print("Which HouseholdBudget you want to see the possessions of? (Enter number 0 to 4): ");
+                    int hbIndex = sc.nextInt();
+                    boolean searchingHB = true;
+                    while(searchingHB) {
+                        if(hbIndex < 0 || hbIndex > 4) {
+                            System.out.print("Sorry but there is no HouseholdBudget number " + hbIndex
+                                    + "\n--> Try again: (Enter number 0 to 4): ");
+                            hbIndex = sc.nextInt();
+                        }
+                        else {
+                            System.out.println(hbs[hbIndex] + "\n");
+                            searchingHB = false;
+                        }
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("List of HouseholdBudgets with same total fund:\n");
+                    for(int i = 0; i < hbs.length; i++) {
+                        for(int j = i+1; j < hbs.length; j++) {
+                            if(hbs[i].equalFundTotal(hbs[j])) {
+                                //fundTotal is always 124.0
+                                System.out.println("\t\tHouseholdBudgets " + i + " and " + j + " both have " + hbs[i].totalFunds());
+                            }
+                        }
+                    }
+                    System.out.println("\n");
+                    break;
+
+                case 4:
+                    System.out.println("List of HouseholdBudgets with same Fund:\n");
+                    for(int i = 0; i < hbs.length; i++) {
+                        for(int j = i+1; j < hbs.length; j++) {
+                            if(hbs[i].equalFundAmount(hbs[j])) {
+                                //All of the HBs have the same fund (Fund fund2)
+                                System.out.println("\t\tHouseholdBudgets " + i + " and " + j + " both have " + hbs[i].fundBreakdown());
+                            }
+                        }
+                    }
+                    System.out.println("\n");
+                    break;
+
+                case 5:
+                    System.out.println("List of HouseholdBudgets with sane amount of money and same number of expenses :\n");
+                    for(int i = 0; i < hbs.length; i++) {
+                        for(int j = i+1; j < hbs.length; j++) {
+                            if(hbs[i].equals(hbs[j])) {
+                                System.out.println("\t\tHouseholdBudgets " + i + " and " + j);
+                            }
+                        }
+                    }
+                    System.out.println("\n");
+                    break;
+
+                case 6:
+                    System.out.print("Which HouseholdBudget to you want to add an Expense to? (Enter number 0 to 4): ");
+                    hbIndex = sc.nextInt();
+                    searchingHB = true;
+                    while(searchingHB) {
+                        if(hbIndex < 0 || hbIndex > 4) {
+                            System.out.print("Sorry but there is no HouseholdBudget number " + hbIndex
+                                    + "\n--> Try again: (Enter number 0 to 4): ");
+                            hbIndex = sc.nextInt();
+                        }
+                        else {
+                            System.out.print("Please enter the following information so that we may complete the expense-"
+                                    + "\n --> Type of expense (Bill, Purchase, etc ..): ");
+                            String scCorrect1 = sc.next(); //Create an empty Scanner input to "reset" the Scanner object.
+                            String type = sc.nextLine();
+                            System.out.print(" --> Amount of the expense: ");
+                            double amount = sc.nextDouble();
+                            System.out.print(" --> Name of the business: ");
+                            String scCorrect2 = sc.next(); //Create an empty Scanner input to "reset" the Scanner object.
+                            String name = sc.nextLine();
+                            System.out.print(" --> Payment due day number and month (seperate by a space): ");
+                            int day = sc.nextInt();
+                            int month = sc.nextInt();
+                            hbs[hbIndex].addExpense(new Expense(type, amount, name, day, month));
+
+                            searchingHB = false;
+                        }
+                    }
+                    break;
+
+                case 7:
+                    System.out.print("Which HouseholdBudget to you want to remove an expense from? (Enter number 0 to 4): ");
+                    hbIndex = sc.nextInt();
+                    searchingHB = true;
+                    while(searchingHB) {
+                        if(hbIndex < 0 || hbIndex > 4) {
+                            System.out.print("Sorry but there is no HouseholdBudget number " + hbIndex
+                                    + "\n--> Try again: (Enter number 0 to 4): ");
+                            hbIndex = sc.nextInt();
+                        }
+                        else if(hbs[hbIndex].nbOfExpenses() == 0) {
+                                System.out.println("Sorry that HouseholdBudget has no expenses\n");
+                        }
+                        else {
+                            System.out.println("(Enter number 0 to " + (hbs[hbIndex].nbOfExpenses()-1) + ")");
+                            int expIndex = sc.nextInt();
+                            hbs[hbIndex].removeExpense(expIndex);
+                        }
+                        searchingHB = false;
+                        System.out.println();
+                    }
+                    break;
+
+                case 8:
+                    System.out.print("Which HouseholdBudget do you want to update an expense form? (Enter number 0 to 4): ");
+                    hbIndex = sc.nextInt();
+                    searchingHB = true;
+                    while(searchingHB) {
+                        if(hbIndex < 0 || hbIndex > 4) {
+                            System.out.print("Sorry but there is no HouseholdBudget number " + hbIndex
+                                    + "\n--> Try again: (Enter number 0 to 4): ");
+                            hbIndex = sc.nextInt();
+                        }
+                        else if(hbs[hbIndex].nbOfExpenses() == 0) {
+                            System.out.println("Sorry that HouseholdBudget has no expenses\n");
+                        }
+                        else {
+                            System.out.println("Which expense do you want to update? (Enter number 0 to " + (hbs[hbIndex].nbOfExpenses()-1) + "):");
+                            int expIndex = sc.nextInt();
+                            boolean searchingExp = true;
+                            while(searchingExp) {
+                                if(expIndex < 0 || expIndex > hbs[hbIndex].nbOfExpenses()-1) {
+                                    System.out.println("Sorry but there is no expense number " + expIndex
+                                            + "\n--> Try again:\n(Enter number 0 to " + (hbs[hbIndex].nbOfExpenses()-1) + "):");
+                                    expIndex = sc.nextInt();
+                                }
+                                else {
+                                    System.out.print(" --> Enter new payment due day number and month (seperate by a space): ");
+                                    int newDay = sc.nextInt();
+                                    int newMonth = sc.nextInt();
+                                    hbs[hbIndex].updateDueDate(expIndex, newDay, newMonth);
+                                    System.out.println("Due Date updated.\n");
+                                    searchingExp = false;
+                                }
+                            }
+                        }
+                        searchingHB = false;
+                    }
+                    break;
+
+                case 9:
+                    System.out.print("Which HouseholdBudget do you want to add Fund to? (Enter number 0 to 4): ");
+                    hbIndex = sc.nextInt();
+                    searchingHB = true;
+                    while(searchingHB) {
+                        if(hbIndex < 0 || hbIndex > 4) {
+                            System.out.print("Sorry but there is no HouseholdBudget number " + hbIndex
+                                    + "\n--> Try again: (Enter number 0 to 4): ");
+                            hbIndex = sc.nextInt();
+                        }
+                        else {
+                            System.out.print("How many loonies, toonies, $5,$10 and $20 bill do you want to add?"
+                                    + "\nEnter 5 numbers seperated by a space): ");
+                            int newLoonies = sc.nextInt();
+                            int newToonies = sc.nextInt();
+                            int newFiveDollars = sc.nextInt();
+                            int newTenDollars = sc.nextInt();
+                            int newTwentyDollars = sc.nextInt();
+                            hbs[hbIndex].addFunds(newLoonies, newToonies, newFiveDollars, newTenDollars, newTwentyDollars);
+                            searchingHB = false;
+                        }
                     }
                     break;
 
@@ -75,6 +252,9 @@ public class BudgetDemo {
                     System.out.print("Thank you for using COMP248 Geek's HouseholdBudget application!");
                     resume = false;
                     break;
+
+                default:
+                    System.out.println("Sorry that is not a valid choice. Try again.\n\n");
             }
         }
         sc.close(); //Close the Scanner object to prevent memory leak.
