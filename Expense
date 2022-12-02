@@ -1,26 +1,40 @@
 package comp248.concordia;
 
+/**
+ * @classDescription The Expense class contains attributes and methods relevant to the creation of an Expense object
+ */
 public class Expense {
-    String expenseType;
-    double amount;
-    String businessName;
-    int dueMonth; //should this be byte?
-    int dueDay; //should this be byte?
+    //Declare attributes related to the relevant information of a day-to-day expense.
+    private String expenseType;
+    private double amount;
+    private String businessName;
+    private int dueMonth, dueDay;
 
+    /** Default constructor */
     public Expense() {
 
     }
 
+    /**
+     * @constructorDescription Constructor with 5 parameters to directly set the values of the attributes upon initialization
+     * @param expenseType The type of Expense
+     * @param amount The amount of the Expense
+     * @param businessName The name of the business from which the Expense originated from
+     * @param dueMonth The due month of the Expense
+     * @param dueDay The due day of the Expense
+     */
     public Expense(String expenseType, double amount, String businessName, int dueMonth, int dueDay) {
         this.expenseType = expenseType;
         this.amount = amount;
         this.businessName = businessName;
+        //Condition that prevents the input of an invalid dueMonth value
         if(dueMonth < 1 || dueMonth > 12) {
             this.dueMonth = 0;
         }
         else {
             this.dueMonth = dueMonth;
         }
+        //Condition that prevents the input of an invalid dueDay value
         if(dueDay < 1 || dueDay > 31) {
             this.dueDay = 0;
         }
@@ -29,6 +43,10 @@ public class Expense {
         }
     }
 
+    /**
+     * @constructorDescription Copy constructor that sets all attributes of the object to those of an already-existing Expense object
+     * @param expense The original Expense object to be copied from
+     */
     public Expense(Expense expense) {
         this.expenseType = expense.expenseType;
         this.amount = expense.amount;
@@ -37,22 +55,30 @@ public class Expense {
         this.dueDay = expense.dueDay;
     }
 
+    //Accessor method for expenseType
     public String getExpenseType() {
         return this.expenseType;
     }
 
+    //Accessor method for amount
     public double getAmount() {
         return this.amount;
     }
 
+    //Accessor method for businessName
     public String getBusinessName() {
         return this.businessName;
     }
 
+    //Accessor method for dueMonth
     public int getDueMonth() {
         return this.dueMonth;
     }
 
+    /**
+     * @methodDescription Mutator method for dueMonth that prevents the input of an invalid dueMonth value
+     * @param dueMonth The new value of dueMonth
+     */
     public void setDueMonth(int dueMonth) {
         if(dueMonth < 1 || dueMonth > 12) {
             this.dueMonth = 0;
@@ -62,10 +88,15 @@ public class Expense {
         }
     }
 
+    //Accessor method for dueDay
     public int getDueDay() {
         return this.dueDay;
     }
 
+    /**
+     * @methodDescription Mutator method for dueDay that prevents the input of an invalid dueDay value
+     * @param dueDay The new value of dueDay
+     */
     public void setDueDay(int dueDay) {
         if(dueDay < 1 || dueDay > 31) {
             this.dueDay = 0;
@@ -75,30 +106,34 @@ public class Expense {
         }
     }
 
+    /**
+     * @methodDescription Displays the attributes of an Expense object with the date as dd/mm
+     * @return The expenseType, amount, businessName, dueDay and dueMonth
+     */
     @Override
     public String toString() {
         if(dueDay < 10 && dueMonth > 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/" + dueMonth + ".";
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/" + dueMonth + ".\n";
         }
         else if(dueMonth < 10 && dueDay > 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/0" + dueMonth + ".";
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/0" + dueMonth + ".\n";
         }
         else if(dueDay < 10 && dueMonth < 10) {
-            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/0" + dueMonth + ".";
+            return expenseType + " - $" + amount + " - " + businessName + " - 0" + dueDay + "/0" + dueMonth + ".\n";
         }
         else {
-            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/" + dueMonth + ".";
+            return expenseType + " - $" + amount + " - " + businessName + " - " + dueDay + "/" + dueMonth + ".\n";
         }
     }
 
+    /**
+     * @methodDescription Verifies if two Expense objects possess the same attribute values
+     * @param otherExpense The second Expense object used in the comparison
+     * @return true if both Expense objects possess the same attribute values, false if not
+     */
     public boolean equals(Expense otherExpense) {
-        if(this.expenseType.equals(otherExpense.expenseType) && this.amount == otherExpense.amount
+        return this.expenseType.equals(otherExpense.expenseType) && this.amount == otherExpense.amount
                 && this.businessName.equals(otherExpense.businessName) && this.dueMonth == otherExpense.dueMonth
-                && this.dueDay == otherExpense.dueDay) {
-            return true;
-        }
-        else {
-            return false;
-        }
+                && this.dueDay == otherExpense.dueDay;
     }
 }
