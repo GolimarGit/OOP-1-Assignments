@@ -1,7 +1,7 @@
 package comp248.concordia;
 
 /**
- * @classDescription
+ * @classDescription The HouseholdBudget class is the primary class that contains methods that directly modify the attributes of the Fund and Expense classes
  */
 public class HouseholdBudget {
     //Declare object variables
@@ -115,8 +115,8 @@ public class HouseholdBudget {
     /**
      * @methodDescription Changes the due date of an Expense object from the HouseholdBudget object's expenses array
      * @param index The position where the desired Expense object is located in the array
-     * @param day The new value for dueDay
-     * @param month The new value for dueMonth
+     * @param day The new value of dueDay
+     * @param month The new value of dueMonth
      */
     public void updateDueDate(int index, int day, int month) {
         //Retrieve the desired Expense object directly from the expenses array.
@@ -145,8 +145,7 @@ public class HouseholdBudget {
      * @methodDescription Verifies if two HouseholdBudget objects possess the same amount of funds
      * and number of Expense objects
      * @param otherHouseholdBudget The second HouseholdBudget object used in the comparison
-     * @return true if both HouseholdBudget objects possess the same fund breakdown and the same expenses array length,
-     * false if not
+     * @return true if both HouseholdBudget objects possess the same fund breakdown and the same expenses array length, false if not
      */
     public boolean equals(HouseholdBudget otherHouseholdBudget) {
         return this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()
