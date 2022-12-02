@@ -1,114 +1,167 @@
 package comp248.concordia;
 
+/**
+ * @classDescription
+ */
 public class HouseholdBudget {
+    //Declare object variables
     private Fund fund;
-    private Expense[] expenses; //should this be initialized?
+    private Expense[] expenses;
 
+    /** Default constructor */
     public HouseholdBudget() {
 
     }
 
+    /**
+     * @constructorDescription Constructor with 2 parameters to directly set the values of the attributes upon initialization
+     * @param fund A Fund object
+     * @param expenses An array of Expense objects
+     */
     public HouseholdBudget(Fund fund, Expense[] expenses) {
         this.fund = fund;
         this.expenses = expenses;
     }
 
+    /**
+     * @methodDescription Verifies if two HouseholdBudget objects possess the same total funds
+     * @param otherHouseholdBudget The second HouseholdBudget object used in the comparison
+     * @return true if both HouseholdBudget objects possess the same total funds, false if not
+     */
     public boolean equalFundTotal(HouseholdBudget otherHouseholdBudget) {
-        if(this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal();
     }
 
+    /**
+     * @methodDescription Verifies if two HouseholdBudget objects possess the same amount of currency types
+     * @param otherHouseholdBudget The second HouseholdBudget object used in the comparison
+     * @return true if both HouseholdBudget objects possess the same attribute values, false if not
+     */
     public boolean equalFundAmount(HouseholdBudget otherHouseholdBudget) {
-        if(this.fund.equals(otherHouseholdBudget.fund)) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.fund.equals(otherHouseholdBudget.fund);
     }
 
+    /**
+     * @methodDescription Returns the total funds of a HouseholdBudget object
+     * @return The total funds of a HouseholdBudget object
+     */
     public double totalFunds() {
         return this.fund.fundTotal();
     }
 
+    /**
+     * @methodDescription Returns the number of expenses that a HouseholdBudget object possesses
+     * @return The number of expenses that a HouseholdBudget object possesses
+     */
     public int nbOfExpenses() {
         return this.expenses.length;
     }
 
+    /**
+     * @methodDescription Adds an Expense object to a HouseholdBudget object's expenses array
+     * @param expense The Expense object to be added in a HouseholdBudget object's expenses array
+     */
     public void addExpense(Expense expense) {
+        //Copy the old expenses array into a temporary oldExpenses array.
         Expense[] oldExpenses = new Expense[this.expenses.length];
         for(int i = 0; i < this.expenses.length; i++) {
             oldExpenses[i] = this.expenses[i];
         }
 
+        //Increment the length of the expenses array to accommodate for the new Expense object.
         this.expenses = new Expense[oldExpenses.length+1];
         for(int i = 0; i < oldExpenses.length; i++) {
             this.expenses[i] = oldExpenses[i];
         }
 
+        //Add the new Expense object to the expenses array.
         this.expenses[this.expenses.length-1] = expense;
 
+        //Print out a success message.
         if(this.expenses.length == 1) {
-            System.out.print("You now have " + this.expenses.length + " expense");
+            System.out.println("You now have " + this.expenses.length + " expense\n\n");
         }
         else {
-            System.out.print("You now have " + this.expenses.length + " expenses");
+            System.out.println("You now have " + this.expenses.length + " expenses\n\n");
         }
     }
 
+    /**
+     * @methodDescription Removes a specified Expense object from a HouseholdBudget object's expenses array
+     * @param index The position where the undesired Expense object is located in the array
+     */
     public void removeExpense(int index) {
-        if(this.expenses.length == 0) {
-            System.out.println("Sorry that HouseholdBudget has no expenses");
+        //Copy the old expenses array into a temporary oldExpenses array.
+        Expense[] oldExpenses = new Expense[this.expenses.length];
+        for(int i = 0; i < this.expenses.length; i++) {
+            oldExpenses[i] = this.expenses[i];
         }
-        else {
-            Expense[] oldExpenses = new Expense[this.expenses.length];
-            for(int i = 0; i < this.expenses.length; i++) {
-                oldExpenses[i] = this.expenses[i];
-            }
 
-            this.expenses = new Expense[oldExpenses.length-1];
-            for(int i = 0; i < this.expenses.length; i++) {
-                if(i == index) {
-                    continue;
-                }
-                this.expenses[i] = oldExpenses[i];
-            }
+        //Decrement the length of the expenses array to compensate for the removed Expense object.
+        this.expenses = new Expense[oldExpenses.length-1];
 
-            System.out.print("Expense was removed successfully");
+        //Copy the elements of the expenses array except the undesired Expense object.
+        for(int i = 0; i < this.expenses.length; i++) {
+            if(i == index) { //Skip over the undesired Expense object
+                continue;
+            }
+            this.expenses[i] = oldExpenses[i]; //The current element in the expenses array is that of oldExpenses
         }
+
+        //Print out a success message.
+        System.out.println("Expense was removed successfully\n");
     }
 
+    /**
+     * @methodDescription Changes the due date of an Expense object from the HouseholdBudget object's expenses array
+     * @param index The position where the desired Expense object is located in the array
+     * @param day The new value for dueDay
+     * @param month The new value for dueMonth
+     */
     public void updateDueDate(int index, int day, int month) {
-        this.expenses[index].setDueDay(day);
-        this.expenses[index].setDueMonth(month);
+        //Retrieve the desired Expense object directly from the expenses array.
+        this.expenses[index].setDueDay(day); //Directly change the dueDay using a mutator method.
+        this.expenses[index].setDueMonth(month); //Directly change the dueMonth using a mutator method.
 
+        //Print out a success message.
         System.out.println("Due Date updated.");
     }
 
-    public void addFunds(int addLoonies, int addToonies, int addFiveBills, int addTenBills, int addTwentyBills) {
-        this.fund.addFund(addLoonies, addToonies, addFiveBills, addTenBills, addTwentyBills);
-        System.out.println("You now have $" + this.fund.fundTotal());
+    /**
+     * @methodDescription Increments the amount of funds a HouseholdBudget object possesses
+     * @param addLoonies The amount of loonies to increment by
+     * @param addToonies The amount of toonies to increment by
+     * @param addFiveDBills The amount of five dollar bills to increment by
+     * @param addTenDBills The amount of ten dollar bills to increment by
+     * @param addTwentyDBills The amount of twenty dollar bills to increment by
+     */
+    public void addFunds(int addLoonies, int addToonies, int addFiveDBills, int addTenDBills, int addTwentyDBills) {
+        //Directly add funds to a HouseholdBudget object's Fund object.
+        this.fund.addFund(addLoonies, addToonies, addFiveDBills, addTenDBills, addTwentyDBills);
+        System.out.println("You now have $" + this.fund.fundTotal() + "\n"); //Print out new total fund value.
     }
 
+    /**
+     * @methodDescription Verifies if two HouseholdBudget objects possess the same amount of funds
+     * and number of Expense objects
+     * @param otherHouseholdBudget The second HouseholdBudget object used in the comparison
+     * @return true if both HouseholdBudget objects possess the same fund breakdown and the same expenses array length,
+     * false if not
+     */
     public boolean equals(HouseholdBudget otherHouseholdBudget) {
-        if(this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()
-                && this.expenses.length == otherHouseholdBudget.expenses.length) {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return this.fund.fundTotal() == otherHouseholdBudget.fund.fundTotal()
+                && this.expenses.length == otherHouseholdBudget.expenses.length;
     }
 
+    /**
+     * @methodDescription Displays the values of a HouseholdBudget object's attributes
+     * @return A HouseholdBudget object's fund breakdown and the elements of its expenses array
+     */
     @Override
     public String toString() {
         String output = this.fund.toString() + "\n";
         if(this.expenses.length == 0) {
-            output += "No expenses";
+            output += "No expenses\n";
         }
         else {
             for(int i = 0; i < this.expenses.length; i++) {
@@ -119,6 +172,10 @@ public class HouseholdBudget {
         return output;
     }
 
+    /**
+     * @methodDescription Displays the amount of currency types a HouseholdBudget possesses
+     * @return The amount of loonies, toonies, fiveDBills, tenDBills and twentyDBills of a HouseholdBudget object's Fund object
+     */
     public String fundBreakdown() {
         return this.fund.toString();
     }
