@@ -1,5 +1,11 @@
 package comp248.concordia;
 
+/* -------------------------------------------------------
+   Assignment 4
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
 /**
  * @classDescription The HouseholdBudget class is the primary class that contains methods that directly modify the attributes of the Fund and Expense classes
  */
@@ -91,21 +97,23 @@ public class HouseholdBudget {
      * @param index The position where the undesired Expense object is located in the array
      */
     public void removeExpense(int index) {
-        //Copy the old expenses array into a temporary oldExpenses array.
-        Expense[] oldExpenses = new Expense[this.expenses.length];
-        for(int i = 0; i < this.expenses.length; i++) {
-            oldExpenses[i] = this.expenses[i];
-        }
-
-        //Decrement the length of the expenses array to compensate for the removed Expense object.
-        this.expenses = new Expense[oldExpenses.length-1];
-
-        //Copy the elements of the expenses array except the undesired Expense object.
-        for(int i = 0; i < this.expenses.length; i++) {
-            if(i == index) { //Skip over the undesired Expense object
+        //Initialize an expenses array with one less space.
+        Expense[] newExpenses = new Expense[this.expenses.length-1];
+        //Copy the old Expense objects from the old array into the new array.
+        for(int i = 0; i < index; i++) {
+            if(index == 0) { //Failsafe for the undesired Expense object being the first element in the array.
                 continue;
             }
-            this.expenses[i] = oldExpenses[i]; //The current element in the expenses array is that of oldExpenses
+            newExpenses[i] = this.expenses[i]; //Add the elements from the start of the array to the undesired Expense.
+        }
+        for(int i = index+1; i < this.expenses.length; i++) {
+            newExpenses[i-1] = this.expenses[i]; //Add the remaining elements of the old array to the new array.
+        }
+
+        //Re-initialize the expenses array with the elements of the newExpenses array.
+        this.expenses = new Expense[this.expenses.length-1];
+        for(int i = 0; i < newExpenses.length; i++) {
+            this.expenses[i] = newExpenses[i];
         }
 
         //Print out a success message.
@@ -124,7 +132,7 @@ public class HouseholdBudget {
         this.expenses[index].setDueMonth(month); //Directly change the dueMonth using a mutator method.
 
         //Print out a success message.
-        System.out.println("Due Date updated.");
+        System.out.println("Due Date updated.\n");
     }
 
     /**
@@ -142,8 +150,7 @@ public class HouseholdBudget {
     }
 
     /**
-     * @methodDescription Verifies if two HouseholdBudget objects possess the same amount of funds
-     * and number of Expense objects
+     * @methodDescription Verifies if two HouseholdBudget objects possess the same amount of funds and number of Expense objects
      * @param otherHouseholdBudget The second HouseholdBudget object used in the comparison
      * @return true if both HouseholdBudget objects possess the same fund breakdown and the same expenses array length, false if not
      */
@@ -160,7 +167,7 @@ public class HouseholdBudget {
     public String toString() {
         String output = this.fund.toString() + "\n";
         if(this.expenses.length == 0) {
-            output += "No expenses\n";
+            output += "No Expenses\n";
         }
         else {
             for(int i = 0; i < this.expenses.length; i++) {
