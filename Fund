@@ -1,11 +1,17 @@
 package comp248.concordia;
 
+/* -------------------------------------------------------
+   Assignment 4
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
 /**
  * @classDescription The Fund class contains attributes and methods relevant to the creation of a Fund object
  */
 public class Fund {
     //Declare static attributes to hold the amount of each currency type a Fund object holds.
-    private static int loonies, toonies, fiveDBills, tenDBills, twentyDBills;
+    private int loonies, toonies, fiveDBills, tenDBills, twentyDBills;
 
     //Initialize the amount of each currency type.
     private static final int ONE_DOLLAR = 1;
@@ -48,53 +54,53 @@ public class Fund {
     }
 
     //Accessor method for loonies
-    public static int getLoonies() {
-        return loonies;
+    public int getLoonies() {
+        return this.loonies;
     }
 
     //Mutator method for loonies
-    public static void setLoonies(int loonies) {
-        Fund.loonies = loonies;
+    public void setLoonies(int loonies) {
+        this.loonies = loonies;
     }
 
     //Accessor method for toonies
-    public static int getToonies() {
-        return toonies;
+    public int getToonies() {
+        return this.toonies;
     }
 
     //Mutator method for toonies
-    public static void setToonies(int toonies) {
-        Fund.toonies = toonies;
+    public void setToonies(int toonies) {
+        this.toonies = toonies;
     }
 
     //Accessor method for fiveDBills
-    public static int getFiveDBills() {
-        return fiveDBills;
+    public int getFiveDBills() {
+        return this.fiveDBills;
     }
 
     //Mutator method for fiveDBills
-    public static void setFiveDBills(int fiveDBills) {
-        Fund.fiveDBills = fiveDBills;
+    public void setFiveDBills(int fiveDBills) {
+        this.fiveDBills = fiveDBills;
     }
 
     //Accessor method for tenDBills
-    public static int getTenDBills() {
-        return tenDBills;
+    public int getTenDBills() {
+        return this.tenDBills;
     }
 
     //Mutator method for tenDBills
-    public static void setTenDBills(int tenDBills) {
-        Fund.tenDBills = tenDBills;
+    public void setTenDBills(int tenDBills) {
+        this.tenDBills = tenDBills;
     }
 
     //Accessor method for twentyDBills
-    public static int getTwentyDBills() {
-        return twentyDBills;
+    public int getTwentyDBills() {
+        return this.twentyDBills;
     }
 
     //Mutator method for twentyDBills
-    public static void setTwentyDBills(int twentyDBills) {
-        Fund.twentyDBills = twentyDBills;
+    public void setTwentyDBills(int twentyDBills) {
+        this.twentyDBills = twentyDBills;
     }
 
     /**
@@ -117,7 +123,7 @@ public class Fund {
      * @methodDescription Returns the sum of the products of the different currency types and the corresponding currency values
      * @return The fund total of the Fund object
      */
-    public int fundTotal() {
+    public double fundTotal() {
         return this.loonies * this.ONE_DOLLAR + this.toonies * this.TWO_DOLLAR + this.fiveDBills * this.FIVE_DOLLAR
                 + this.tenDBills * this.TEN_DOLLAR + this.twentyDBills * this.TWENTY_DOLLAR;
     }
@@ -133,7 +139,6 @@ public class Fund {
                 + ") + (" + this.twentyDBills + " x $" + this.TWENTY_DOLLAR + ")";
     }
 
-    //SOMETHING WRONG HERE
     /**
      * @methodDescription Verifies if two Fund objects possess the same amount of currency types
      * @param otherFund The second HouseholdBudget object used in the comparison
