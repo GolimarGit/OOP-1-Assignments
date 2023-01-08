@@ -1,0 +1,167 @@
+package comp248.concordia;
+
+/* -------------------------------------------------------
+   Assignment 2
+   Written by: Laurenz Marius Gomez 40247966
+   For COMP 248 Section T – Fall 2022
+   -------------------------------------------------------- */
+
+import java.util.Scanner;
+
+/**
+ * @programDescription A program that calculates the desired corresponding monthly price index I (based on the equation
+ * specified in the Assignment Instructions) for the farms' distribution center for the domestic or international market
+ * depending on the user's input.
+ */
+public class A2_Q2 {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in); //Initialize Scanner object
+        System.out.print("Welcome to Farms Distribution Center Price Index Program:" //Print out welcome message
+                + "\n=========================================================\n"
+                + "\nPlease enter a Month and Market, respectively: "); //Prompt the user to enter a desired month and market
+        String month = sc.next(); //Separating the user input into month and market variables
+        String market = sc.next();
+        findIndex(month, market); //Passing the month and market inputs to the findIndex method
+        sc.close(); //Close the Scanner object to prevent memory leak
+    }
+
+    /**
+     * @methodDescription The findIndex method takes the month and market inputs to find the specified percentage of
+     * harvest P to be used in the calculation of the price index I
+     * @param month The month of the user's desired price index
+     * @param market The market of the user's desired price index
+     */
+    public static void findIndex(String month, String market) {
+        final double W = 1.4672; //Initialize constant value W: the estimate of the initial production
+        double p = 0d; //Initialize the value p that will change depending on the user's input
+
+        /*
+        The switch case used to assign the correct numerical value of p.
+        First, the method identifies the desired market (domestic or international) from the market input.
+        Second, the method identifies the desired month from the market input.
+        The variable p is then set to its corresponding value
+         */
+        switch(market.toLowerCase()) {
+            case "domestic":
+                switch(month.toLowerCase()) {
+                    case "january":
+                        p = 75.25;
+                        break;
+
+                    case "february":
+                        p = 62.86;
+                        break;
+
+                    case "march":
+                        p = 54.78;
+                        break;
+
+                    case "april":
+                        p = 68.46;
+                        break;
+
+                    case "may":
+                        p = 35.89;
+                        break;
+
+                    case "june":
+                        p = 28.94;
+                        break;
+
+                    case "july":
+                        p = 42.5;
+                        break;
+
+                    case "august":
+                        p = 86.1;
+                        break;
+
+                    case "september":
+                        p = 69.7;
+                        break;
+
+                    case "october":
+                        p = 85.4;
+                        break;
+
+                    case "november":
+                        p = 75.9;
+                        break;
+
+                    case "december":
+                        p = 76.8;
+                        break;
+
+                    //Default case for an invalid month input
+                    default:
+                        System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
+                }
+                break;
+
+            case "international":
+                switch(month.toLowerCase()) {
+                    case "january":
+                        p = 24.75;
+                        break;
+
+                    case "february":
+                        p = 37.14;
+                        break;
+
+                    case "march":
+                        p = 45.22;
+                        break;
+
+                    case "april":
+                        p = 31.54;
+                        break;
+
+                    case "may":
+                        p = 64.11;
+                        break;
+
+                    case "june":
+                        p = 71.06;
+                        break;
+
+                    case "july":
+                        p = 57.5;
+                        break;
+
+                    case "august":
+                        p = 13.9;
+                        break;
+
+                    case "september":
+                        p = 30.3;
+                        break;
+
+                    case "october":
+                        p = 14.6;
+                        break;
+
+                    case "november":
+                        p = 24.1;
+                        break;
+
+                    case "december":
+                        p = 23.2;
+                        break;
+
+                    //Default case for an invalid month input
+                    default:
+                        System.out.println("Error: An invalid value has been entered for the 'Month' variable. Please retry again!");
+                }
+                break;
+
+                //Default case for an invalid market input
+                default:
+                    System.out.println("Error: An invalid value has been entered for the 'Market' variable. Please retry again!");
+        }
+
+        double i = (p * W) / 20d; //Initializing the price index
+        System.out.printf("\nThe value of the Price Index, 'I', is: %.2f", i); //Display the calculated price index
+        System.out.print("\nThank you for using Farms Distribution Center Price Index Program!"); //Print out closing message
+    }
+}
